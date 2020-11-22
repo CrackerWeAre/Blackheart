@@ -11,12 +11,12 @@ const DrawerWrapper = styled.aside`
     font-family: 'Nanum Gothic', sans-serif;
     position: fixed;
     height: 100%;
-    width: 240px;
+    width: 180px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 
     h1 {
         color: #7F7F7F;
-        font-size: 1rem;
+        font-size: 0.8rem;
         text-align: left;
         padding: 10px 10px 0px 20px;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -57,6 +57,7 @@ const DrawerWrapper = styled.aside`
     }
 
     ul li a div span {
+        font-size: 0.8rem;
         padding-left: 20px;
         font-weight: 600;
     }
@@ -73,7 +74,7 @@ const Drawer = () => {
             <h1>상품관리</h1>
             <ul>
                 <li>    
-                    <Link to="">
+                    <Link to="/admin/product/create">
                         <div>
                             <FontAwesomeIcon icon={faEdit} />
                             <span>상품 등록</span>
@@ -81,7 +82,7 @@ const Drawer = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="">
+                    <Link to="/admin/product/discover">
                         <div>
                             <FontAwesomeIcon icon={faSearch} />
                             <span>상품 조회</span>
@@ -93,7 +94,7 @@ const Drawer = () => {
             <h1>회원관리</h1>
             <ul>
                 <li>    
-                    <Link to="">
+                    <Link to="/admin/user/discover">
                         <div>
                             <FontAwesomeIcon icon={faEdit} />
                             <span>회원정보 조회</span>
@@ -101,7 +102,7 @@ const Drawer = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="">
+                    <Link to="/admin/user/orderDiscover">
                         <div>
                             <FontAwesomeIcon icon={faSearch} />
                             <span>주문회원 조회</span>
@@ -113,7 +114,7 @@ const Drawer = () => {
             <h1>주문관리</h1>
             <ul>
                 <li>    
-                    <Link to="">
+                    <Link to="/admin/order/discover">
                         <div>
                             <FontAwesomeIcon icon={faStore} />
                             <span>전체 주문 조회</span>
@@ -121,7 +122,7 @@ const Drawer = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="">
+                    <Link to="/admin/order/delivery">
                         <div>
                             <FontAwesomeIcon icon={faTruck} />
                             <span>배송 관리</span>
@@ -133,7 +134,7 @@ const Drawer = () => {
             <h1>게시판관리</h1>
             <ul>
                 <li>    
-                    <Link to="">
+                    <Link to="/admin/board/discover">
                         <div>
                             <FontAwesomeIcon icon={faStore} />
                             <span>게시판 관리</span>
@@ -141,7 +142,7 @@ const Drawer = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="">
+                    <Link to="/admin/board/discover">
                         <div>
                             <FontAwesomeIcon icon={faTruck} />
                             <span>게시물 관리</span>
