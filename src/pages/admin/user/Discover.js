@@ -1,17 +1,19 @@
 import React from 'react';
 import HeaderContainer from 'containers/common/HeaderContainer';
 import Drawer from 'components/common/Drawer';
+import DashboardWrapper from 'containers/admin/user/DashboardWrapper';
+
+import 'semantic-ui-css/semantic.min.css';
+
 
 const AdminDashboardPage = () => {
-    return (
-      <>
-        <HeaderContainer adminheader dark />
-        <Drawer />
-        <div>
-          <h1>회원 정보 조회</h1>
-        </div>
-      </>
-    );
+  return (
+    <>
+      <HeaderContainer adminheader dark />
+      <Drawer />
+      <DashboardWrapper />
+    </>
+  );
 };
 
 export default AdminDashboardPage;

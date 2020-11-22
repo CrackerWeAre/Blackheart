@@ -13,12 +13,14 @@ const DrawerWrapper = styled.aside`
     height: 100%;
     width: 180px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.1rem;
 
     h1 {
         color: #7F7F7F;
-        font-size: 0.8rem;
+        font-size: 1.2rem;
         text-align: left;
-        padding: 10px 10px 0px 20px;
+        margin:10px 0;
+        padding: 15px 10px 0px 20px;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
 
@@ -27,12 +29,11 @@ const DrawerWrapper = styled.aside`
     }
 
     ul {
-        padding: 10px 10px;
+        padding: 5px 20px;
     }
 
     ul li {
-        padding: 8px;
-        margin: 5px 0;
+        padding: 2px;
         border-radius: 4px;
     }
 
@@ -57,9 +58,9 @@ const DrawerWrapper = styled.aside`
     }
 
     ul li a div span {
-        font-size: 0.8rem;
+        font-size: 1rem;
         padding-left: 20px;
-        font-weight: 600;
+        font-weight: 500;
     }
 
     ul:last-child {

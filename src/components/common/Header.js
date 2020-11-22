@@ -72,13 +72,21 @@ const AdminHeaderWrapper = styled(HeaderWrapper)`
         top: 0;
         left: 8%;
         transform: translate(-50%, 50%);
-        margin-left: 30px;
+        margin: 15px 0 0 30px;
         padding-top: 0;
 
         a {
-            font-size: 1.3rem;
+            font-size: 2rem;
         }
     }
+
+    nav ul li a {
+        font-size: 1rem;
+        margin: 0 10px;
+        font-weight: 500;
+        z-index: 9999;
+        color: #000;
+      }
 
     .admin_name {
         text-decoration: underline;
@@ -98,9 +106,10 @@ const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
                         <h1 className="sr-only">Navigation Menu</h1>
                         <ul>
                             <li>
-                                운영자정보
+                            <Link to="/">Home</Link>
                             </li>
                         </ul>
+
                     </nav>
                 </AdminHeaderWrapper>
             </>
@@ -122,6 +131,9 @@ const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
                             </li>
                             <li>
                                 <Link to="/main/login">Sign In</Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/main">Admin</Link>
                             </li>
                         </ul>
                     </nav>
