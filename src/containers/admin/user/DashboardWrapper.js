@@ -9,15 +9,16 @@ const Wrapper = styled.div`
   position: relative;
   font-family: 'Nanum Gothic', sans-serif;
 
-  h3 {
+  h6 {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 20px;
+    top: -20px;
     font-size: 1rem;
+    font-weight: 600;
   }
 
-  .adminFilter {
-      margin: 10px;
+  span {
+    transfrom: translateY(-20px);
   }
 
 
@@ -27,7 +28,9 @@ const Wrapper = styled.div`
 const DashboardWrapper = () => {
     return (
         <Wrapper>
-            <AdminFilter />
+            <h6>회원정보 조회</h6>
+            <hr/>
+            {/* <AdminFilter /> */}
             <TableFullWidth className="tableFullWidth" />
         </Wrapper>
     )

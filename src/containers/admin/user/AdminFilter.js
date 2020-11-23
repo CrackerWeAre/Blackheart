@@ -5,41 +5,41 @@ import styled from 'styled-components';
 const filterOptions = {
   gender: [
     {
-      key: 'gender',
+      key: 'male',
       text: '남성',
       value: 'M',
     },
     {
-      key: 'gender',
+      key: 'female',
       text: '여성',
       value: 'W',
     },
   ],
   level: [
     {
-      key: 'level',
+      key: '0',
       text: '0',
       value: '0',
     },
   ],
   joinPath: [
     {
-      key: 'joinPath',
+      key: 'homepage',
       text: '홈페이지',
       value: 'homepage',
     },
     {
-      key: 'joinPath',
+      key: 'naver',
       text: '네이버',
       value: 'naver',
     },
     {
-      key: 'joinPath',
+      key: 'google',
       text: '구글',
       value: 'google',
     },
     {
-      key: 'joinPath',
+      key: 'kakao',
       text: '카카오',
       value: 'kakao',
     },
@@ -49,7 +49,7 @@ const filterOptions = {
 const Wrapper = styled.div`
   .container {
     display: flex;
-    margin: 20px 0!important;
+    margin: 20px 0 !important;
   }
 
   .dropdown {
@@ -57,31 +57,29 @@ const Wrapper = styled.div`
   }
 `;
 
-
 const AdminFilter = () => {
   return (
     <Wrapper>
-    <Container className="container">
-      <Dropdown
-        placeholder="성별"
-        selection
-        allowAdditions
-        options={filterOptions.gender}
-        className="dropdown"
-      ></Dropdown>
-      <Dropdown
-        placeholder="등급"
-        selection
-        options={filterOptions.level}
-        className="dropdown"
-      ></Dropdown>
-      <Dropdown
-        placeholder="가입경로"
-        selection
-        options={filterOptions.joinPath}
-        className="dropdown"
-      ></Dropdown>
-    </Container>
+      <Container className="container">
+        <Dropdown
+          placeholder="성별"
+          selection
+          options={filterOptions.gender}
+          className="dropdown"
+        ></Dropdown>
+        <Dropdown
+          placeholder="등급"
+          selection
+          options={filterOptions.level}
+          className="dropdown"
+        ></Dropdown>
+        <Dropdown
+          placeholder="가입경로"
+          selection
+          options={filterOptions.joinPath}
+          className="dropdown"
+        ></Dropdown>
+      </Container>
     </Wrapper>
   );
 };
