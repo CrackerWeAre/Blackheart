@@ -40,15 +40,13 @@ const HeaderWrapper = styled.header`
     z-index: 9999;
   }
 
-  nav ul li {
-  }
-
   nav ul li a {
     font-size: 1rem;
     margin: 0 10px;
     font-weight: 500;
     z-index: 9999;
     color: #ffffff;
+    font-family: 'Poppins', serif;
   }
 
   ${(props) => props.dark && css`
@@ -86,14 +84,10 @@ const AdminHeaderWrapper = styled(HeaderWrapper)`
         font-weight: 500;
         z-index: 9999;
         color: #000;
-      }
-
-    .admin_name {
-        text-decoration: underline;
     }
 `;
 
-const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
+const Header = ({ user, onLogout, adminheader, ...otherProps }) => {
   return (
     <>
         {adminheader ? (
@@ -105,11 +99,10 @@ const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
                     <nav>
                         <h1 className="sr-only">Navigation Menu</h1>
                         <ul>
-                            <li>
-                            <Link to="/">Home</Link>
-                            </li>
+                            <Link to="/">
+                                Home
+                            </Link>
                         </ul>
-
                     </nav>
                 </AdminHeaderWrapper>
             </>
@@ -130,7 +123,10 @@ const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
                                 <Link to="/product/shop">Shop</Link>
                             </li>
                             <li>
-                                <Link to="/main/login">Sign In</Link>
+                                <Link to="/main/login">Log In</Link>
+                            </li>
+                            <li>
+                                <Link to="/main/join">Sign Up</Link>
                             </li>
                             <li>
                                 <Link to="/admin/main">Admin</Link>

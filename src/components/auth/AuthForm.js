@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// eslint-disable-next-line
-import { Link } from 'react-router-dom';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
 
@@ -21,8 +19,8 @@ const BtnMt = styled(Button)`
 `;
 
 const btnTypeText = {
-    login: 'Sign In',
-    join: 'Sign Up'
+    login: '로그인',
+    join: '회원가입'
 };
 
 const AdminAuthForm = ({ type, onChange, onSubmit, error, form }) => {

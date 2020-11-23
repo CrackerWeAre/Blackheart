@@ -28,7 +28,6 @@ const App = () => {
       <GlobalStyle />
       {/* Admin_Page */}
       <Route component={AdminMainPage} path="/admin/main" exact />
-
       <Route component={AdminLoginPage} path={["/admin", "/admin/login"]} exact />
       <Route component={AdminJoinPage} path="/admin/join" />
       {/* 상품 관리 */}
