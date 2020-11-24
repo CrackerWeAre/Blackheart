@@ -14,11 +14,12 @@ import { Mileage } from './mypagemenu/myinfo/Mileage'
 import { CancleList } from './mypagemenu/myorder/CancleList'
 import { OrderList } from './mypagemenu/myorder/OrderList'
 import { Review } from './mypagemenu/myorder/Review'
+import { Navibar } from './Navibar'
 
 export const Mypage = () => {
     return (
         <>
-            <Navibar></Navibar>
+            <Navibar />
             <Switch>
                 <Route path="/mypage" component={MainPage}></Route>
                 <Route path="/mypage/myorder/orderlist" component={OrderList}></Route>
