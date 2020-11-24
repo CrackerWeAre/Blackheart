@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Dropdown } from 'semantic-ui-react';
+import { Container, Dropdown, Table, Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const filterOptions = {
@@ -47,39 +47,62 @@ const filterOptions = {
 };
 
 const Wrapper = styled.div`
-  .container {
-    display: flex;
-    margin: 20px 0 !important;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  .dropdown {
-    margin: 0;
+`;
+
+const StyledTable = styled(Table)`
+  table td th {
+    font-size: 12px;
   }
 `;
+
+const ButtonExampleEmphasis = () => (
+  <div>
+    <Button primary>검색</Button>
+  </div>
+);
+
+const TableExampleColumnCount = () => (
+  <StyledTable columns={4}>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>검색어</Table.Cell>
+        <Table.Cell></Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>구매금액/건수</Table.Cell>
+        <Table.Cell></Table.Cell>
+        <Table.Cell>주문상품</Table.Cell>
+        <Table.Cell></Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>주문일/결제완료일</Table.Cell>
+        <Table.Cell></Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>나이</Table.Cell>
+        <Table.Cell></Table.Cell>
+        <Table.Cell>가입일/기념일</Table.Cell>
+        <Table.Cell></Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>SMS수신</Table.Cell>
+        <Table.Cell></Table.Cell>
+        <Table.Cell>이메일수신</Table.Cell>
+        <Table.Cell></Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </StyledTable>
+);
 
 const AdminFilter = () => {
   return (
     <Wrapper>
-      <Container className="container">
-        <Dropdown
-          placeholder="성별"
-          selection
-          options={filterOptions.gender}
-          className="dropdown"
-        ></Dropdown>
-        <Dropdown
-          placeholder="등급"
-          selection
-          options={filterOptions.level}
-          className="dropdown"
-        ></Dropdown>
-        <Dropdown
-          placeholder="가입경로"
-          selection
-          options={filterOptions.joinPath}
-          className="dropdown"
-        ></Dropdown>
-      </Container>
+      <TableExampleColumnCount />
+      <ButtonExampleEmphasis />
     </Wrapper>
   );
 };

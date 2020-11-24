@@ -1,13 +1,13 @@
-import { userDiscoverAPI } from 'lib/api/admin/User';
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Checkbox, Icon, Table, Menu } from 'semantic-ui-react';
+import { StyledPagination } from 'components/common/StyledPagination';
+import { userDiscoverAPI } from 'lib/api/admin/User';
+import { Button, Checkbox, Icon, Table } from 'semantic-ui-react';
 
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   font-size: 12px;
   margin-top: 20px;
-
 
   .table .menu .button {
     margin: 10px;
@@ -20,6 +20,17 @@ const TableFullWidth = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const checkBox = useRef();
+
+  const PaginationExampleShorthand = () => (
+    <StyledPagination
+      defaultActivePage={1}
+      firstItem={null}
+      lastItem={null}
+      pointing
+      secondary
+      totalPages={3}
+    />
+  )
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -82,41 +93,27 @@ const TableFullWidth = () => {
         ))}
       </Table>
 
-      <Menu className="menu" pagination>
-        <Menu.Item as="a" icon>
-          <Icon name="chevron left" />
-        </Menu.Item>
-        <Menu.Item as="a">1</Menu.Item>
-        <Menu.Item as="a">2</Menu.Item>
-        <Menu.Item as="a">3</Menu.Item>
-        <Menu.Item as="a">4</Menu.Item>
-        <Menu.Item as="a" icon>
-          <Icon name="chevron right" />
-        </Menu.Item>
-      </Menu>
-
-
-
+      <PaginationExampleShorthand></PaginationExampleShorthand>
+      
       <Button
         className="button"
         floated="right"
         icon
         labelPosition="left"
-        color="red"
+        color=""
         size="small"
       >
-        <Icon name="user" /> Remove User
+        <Icon name="user" /> Remove
       </Button>
-
       <Button
         className="button"
         floated="right"
         icon
         labelPosition="left"
-        primary
+        color=""
         size="small"
       >
-        <Icon name="user" /> Add User
+        <Icon name="user" /> Modify
       </Button>
     </Wrapper>
   );
