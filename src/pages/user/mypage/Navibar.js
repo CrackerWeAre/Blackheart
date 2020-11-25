@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 const NaviBar = styled.div`
     width : 250px;
@@ -34,42 +35,59 @@ const NaviBar = styled.div`
         text-decoration: none
     }
 `
+
+const NavHeader = styled.div`
+    position: absolute;
+    height: 250px; 
+    top: 150px;
+    left: 300px;
+    width: calc(100% - 350px);
+    background-color: #000000;
+    color: white;
+`
 export const Navibar = () => {
     return (
-        <NaviBar>
-            <section className="shortInfo">
-                <div className="infoSummary">
-                    <h2 className="infoSummaryTitle">사용자이름</h2>
-                    <ul className="infoSummeryContents">
-                        <li>장바구니</li>
-                        <li></li>
+        <>
+            <NavHeader>
+                    <div>
+                        aaaaaaa
+                    </div>
+                </NavHeader>
+            <NaviBar>
+                <section className="shortInfo">
+                    <div className="infoSummary">
+                        <h2 className="infoSummaryTitle">사용자이름</h2>
+                        <ul className="infoSummeryContents">
+                            <li>장바구니</li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </section>
+                <section className="infoListContainer">
+                    <h3 className="infoListTitle">나의 쇼핑정보</h3>
+                    <ul className="infoListContents">
+                        <li className="infoListItem"><Link to="/mypage/orderlist">주문내역조회</Link></li>
+                        <li className="infoListItem"><Link to="/mypage/reviewlist">상품 리뷰</Link></li>
+                        <li className="infoListItem"><a>증빙서류 발급</a></li>
                     </ul>
-                </div>
-            </section>
-            <section className="infoListContainer">
-                <h3 className="infoListTitle">나의 쇼핑정보</h3>
-                <ul className="infoListContents">
-                    <li className="infoListItem"><a>주문내역조회</a></li>
-                    <li className="infoListItem"><a>상품 리뷰</a></li>
-                    <li className="infoListItem"><a>증빙서류 발급</a></li>
-                </ul>
-                <h3 className="infoListTitle">나의 계정설정</h3>
-                <ul className="infoListContents">
-                    <li className="infoListItem"><a>회원정보수정</a></li>
-                    <li className="infoListItem"><a>회원등급</a></li>
-                    <li className="infoListItem"><a>마일리지현황</a></li>
-                    <li className="infoListItem"><a>쿠폰</a></li>
-                </ul>
-                <h3 className="infoListTitle">고객센터</h3>
-                <ul className="infoListContents">
-                    <li className="infoListItem"><a>1:1문의내역</a></li>
-                    <li className="infoListItem"><a>상품 Q&A내역</a></li>
-                    <li className="infoListItem"><a>공지사항</a></li>
-                    <li className="infoListItem"><a>FAQ</a></li>
-                    <li className="infoListItem"><a>고객의 소리</a></li>
-                </ul>
-            </section>
-        </NaviBar>
+                    <h3 className="infoListTitle">나의 계정설정</h3>
+                    <ul className="infoListContents">
+                        <li className="infoListItem"><a>회원정보수정</a></li>
+                        <li className="infoListItem"><a>회원등급</a></li>
+                        <li className="infoListItem"><a>마일리지현황</a></li>
+                        <li className="infoListItem"><a>쿠폰</a></li>
+                    </ul>
+                    <h3 className="infoListTitle">고객센터</h3>
+                    <ul className="infoListContents">
+                        <li className="infoListItem"><a>1:1문의내역</a></li>
+                        <li className="infoListItem"><a>상품 Q&A내역</a></li>
+                        <li className="infoListItem"><a>공지사항</a></li>
+                        <li className="infoListItem"><a>FAQ</a></li>
+                        <li className="infoListItem"><a>고객의 소리</a></li>
+                    </ul>
+                </section>
+            </NaviBar>
+        </>
     )
 }
 

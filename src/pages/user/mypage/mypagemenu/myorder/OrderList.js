@@ -59,28 +59,34 @@ export const OrderList = ({data}) => {
     };
 
     const OrderList = styled.section`
-        height : 250px;
-        padding : 50px 50px 0px 0px;
+        height : 100%;
+        width: calc(100% - 250px);
+        padding : 300px 0px 0px 0px;
         flex: none;
+        margin-top : 100px;
 
         header {
+            height : 120px;
             margin-bottom: 38px;
+            width : 100%;
         }
 
         header h2 {
-            margin-bottom: 8px;
+            width : 100%;
+            margin-bottom: 12px;
             font-size: 22px;
             line-height: 26px;
             font-weight: 800px;
         }
 
         header ul {
+            width : 100%;
             margin-bottom: 28px;
         }
 
         header ul li {
             display: inline-block;
-            margin-rigth: 16px;        }
+            margin-right: 16px;        }
 
         ul {
             margin-bottom: 28px;
@@ -91,7 +97,7 @@ export const OrderList = ({data}) => {
         }
 
         table {
-            width: 100%;
+            width : 100%;
             border-collapse: collapse;
             table-layout: fixed;
         }
@@ -101,7 +107,7 @@ export const OrderList = ({data}) => {
         }
 
         table colgroup col:nth-child(1){
-            width: *;
+            width: 40%;
         }
 
         table th {
@@ -129,6 +135,7 @@ export const OrderList = ({data}) => {
                     나의 쇼핑내역
                 </h2>
                 <ul className="headerList">
+                    <li>All</li>
                     <li>입금/결제</li>
                     <li>배송중</li>
                     <li>배송완료</li>

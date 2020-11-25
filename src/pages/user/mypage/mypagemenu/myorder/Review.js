@@ -58,28 +58,34 @@ export const Review = () => {
     };
 
     const ReviewList = styled.section`
-        height : 250px;
-        padding : 50px 50px 0px 0px;
+        height : 100%;
+        width: calc(100% - 250px);
+        padding : 300px 0px 0px 0px;
         flex: none;
+        margin-top : 100px;
 
         header {
+            height : 120px;
             margin-bottom: 38px;
+            width : 100%;
         }
 
         header h2 {
-            margin-bottom: 8px;
+            width : 100%;
+            margin-bottom: 12px;
             font-size: 22px;
             line-height: 26px;
             font-weight: 800px;
         }
 
         header ul {
+            width : 100%;
             margin-bottom: 28px;
         }
 
         header ul li {
             display: inline-block;
-            margin-rigth: 16px;        }
+            margin-right: 16px;        }
 
         ul {
             margin-bottom: 28px;
@@ -121,17 +127,11 @@ export const Review = () => {
         <ReviewList>
             <header className="reviewListHeader">
                 <h2 className="headerTitle">
-                    나의 쇼핑내역
+                    나의 리뷰내역
                 </h2>
                 <ul className="headerList">
-                    <li>입금/결제</li>
-                    <li>배송중</li>
-                    <li>배송완료</li>
-                    <li>구매확정</li>
-                    <li>교환</li>
-                    <li>교환완료</li>
-                    <li>환불</li>
-                    <li>환불완료</li>
+                    <li>작성 가능한 리뷰</li>
+                    <li>내 리뷰</li>
                 </ul>
             </header>
             <table className="reviewListTable">

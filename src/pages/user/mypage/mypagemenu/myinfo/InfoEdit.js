@@ -1,5 +1,5 @@
-import React, { Component } from 'pages/user/mypage/mypagemenu/myinfo/react'
-import { connect } from 'pages/user/mypage/mypagemenu/myinfo/react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 export const InfoEdit = () => {
     return (
