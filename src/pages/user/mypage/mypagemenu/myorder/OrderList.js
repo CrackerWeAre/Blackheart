@@ -1,11 +1,159 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import styled, { css } from 'styled-components';
 
-export const OrderList = () => {
+export const OrderList = ({data}) => {
+
+    const tableList = data.map((item)=>{
+        return (
+            <tr className="orderTableRow">
+                <td>
+                    <div>
+                        제품 디테일
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        제품 구매날짜
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        제품 주문번호
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        상태
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        상태
+                    </div>
+                </td>
+            </tr>
+        )
+    })
+
+    const OrderList = styled.section`
+        height : 250px;
+        padding : 50px 50px 0px 0px;
+        flex: none;
+
+        header {
+            margin-bottom: 38px;
+        }
+
+        header h2 {
+            margin-bottom: 8px;
+            font-size: 22px;
+            line-height: 26px;
+            font-weight: 800px;
+        }
+
+        header ul {
+            margin-bottom: 28px;
+        }
+
+        header ul li {
+            display: inline-block;
+            margin-rigth: 16px;        }
+
+        ul {
+            margin-bottom: 28px;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        table colgroup col{
+            width: 15%;
+        }
+
+        table colgroup col:nth-child(1){
+            width: *;
+        }
+
+        table th {
+            height: 52px;
+            border-bottom: 1px solid #000000;
+            vertical-align: middle;
+            font-weight: normal;
+        }
+
+        table td {
+            height: 70px;
+            padding: 10px;
+            box-sizing: border-box;
+            broder-bottom: 1px solid #f5f5f5;
+            text-align: center;
+            vertical-align: middle;
+            word-break: break-all;
+        }
+    `
+
     return (
-        <div>
-            
-        </div>
+        <OrderList>
+            <header className="orderListHeader">
+                <h2 className="headerTitle">
+                    나의 쇼핑내역
+                </h2>
+                <ul className="headerList">
+                    <li>입금/결제</li>
+                    <li>배송중</li>
+                    <li>배송완료</li>
+                    <li>구매확정</li>
+                    <li>교환</li>
+                    <li>교환완료</li>
+                    <li>환불</li>
+                    <li>환불완료</li>
+                </ul>
+            </header>
+            <table className="orderListTable">
+                <colgroup className="orderListColGroup">
+                    <col className="orderListCol"></col>
+                    <col className="orderListCol"></col>
+                    <col className="orderListCol"></col>
+                    <col className="orderListCol"></col>
+                    <col className="orderListCol"></col>
+                </colgroup>
+                <thead className="orderListTableHead">
+                    <tr className="orderListTableRow">
+                        <th scope="col">
+                            <div className="tableDiv">
+                                제품 디테일
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableDiv">
+                                제품 구매날짜
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div  className="tableDiv">
+                                제품 주문번호
+                            </div>
+                        </th>
+                        <th scope="col" colSpan="2">
+                            <div className="tableDiv">
+                                상태
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody className="orderListTableBody">
+                    {tableList}
+                </tbody>
+            </table>
+        </OrderList>
     )
 }
 

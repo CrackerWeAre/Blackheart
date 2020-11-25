@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-export const MainView = () => {
+export const MyPageHeader = () => {
     return (
         <div>
-            <table></table>
+            
         </div>
     )
 }
@@ -17,4 +17,4 @@ const mapDispatchToProps = {
     
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainView)
+export default connect(mapStateToProps, mapDispatchToProps)(MyPageHeader)
