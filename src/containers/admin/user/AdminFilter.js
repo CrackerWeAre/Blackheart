@@ -50,6 +50,7 @@ const Wrapper = styled.div`
   .container {
     display: flex;
     margin: 20px 0!important;
+    margint-top: 150px;
   }
 
   .dropdown {
