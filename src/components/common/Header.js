@@ -3,13 +3,11 @@ import styled, { css } from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: space-between;
   width: 100%;
   height: 100px;
-  ${(props) =>
-    props.adminheader && 'border-bottom: 1px solid rgba(0, 0, 0, 0.1);'};
 
   h1 {
     position: absolute;
@@ -63,18 +61,20 @@ const HeaderWrapper = styled.header`
 `;
 
 const AdminHeaderWrapper = styled(HeaderWrapper)`
+    position: relative;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     h1 {
         position: absolute;
         top: 0;
         left: 8%;
-        transform: translate(-50%, 50%);
+        transform: translate(-50%, 35%);
         margin: 15px 0 0 30px;
         padding-top: 0;
+        font-family: 'Playfair Display', serif;
 
         a {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 
@@ -87,7 +87,7 @@ const AdminHeaderWrapper = styled(HeaderWrapper)`
     }
 `;
 
-const Header = ({ user, onLogout, adminheader, ...otherProps }) => {
+const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
   return (
     <>
         {adminheader ? (
@@ -123,10 +123,10 @@ const Header = ({ user, onLogout, adminheader, ...otherProps }) => {
                                 <Link to="/product/shop">Shop</Link>
                             </li>
                             <li>
-                                <Link to="/main/login">Log In</Link>
+                                <Link to="/member/login">Log In</Link>
                             </li>
                             <li>
-                                <Link to="/main/join">Sign Up</Link>
+                                <Link to="/member/join">Sign Up</Link>
                             </li>
                             <li>
                                 <Link to="/admin/main">Admin</Link>

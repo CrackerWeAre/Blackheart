@@ -4,7 +4,7 @@ import AdminFilter from './AdminFilter';
 import TableFullWidth from './TableFullWidth';
 
 const Wrapper = styled.div`
-  margin: 50px 0px 0px 200px;
+  margin: 0px 0px 0px 200px;
   padding: 20px;
   position: relative;
   font-family: 'Nanum Gothic', sans-serif;
@@ -20,9 +20,6 @@ const Wrapper = styled.div`
   span {
     transfrom: translateY(-20px);
   }
-
-
-
 `;
 
 const DashboardWrapper = () => {
