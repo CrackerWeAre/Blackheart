@@ -1,40 +1,62 @@
+import Pagination from 'components/common/Pagination';
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled, { css } from 'styled-components';
 
 export const OrderList = ({data}) => {
 
-    const tableList = data.map((item)=>{
-        return (
-            <tr className="orderTableRow">
-                <td>
-                    <div>
-                        제품 디테일
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        제품 구매날짜
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        제품 주문번호
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        상태
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        상태
-                    </div>
-                </td>
-            </tr>
-        )
-    })
+    const [itemList, setItemList] = useState([])
+    const [itemListNum, setItemListNum] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10)
+    const [totalPosts, setTotalPosts] = useState(20)
+    const [loading, setLoading] = useState(false)
+    const indexOfLastPost = itemListNum * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = itemList.slice(indexOfFirstPost, indexOfLastPost);
+
+
+    const paginate = (numb) => {
+        setItemListNum(numb)
+    }
+
+    const tableList = ({loading, data}) => {
+        if(loading){
+            return  <div> 로딩중 입니다. </div>
+        } else {
+            return data.map((item)=>{
+                return (
+                    <tr className="orderTableRow">
+                        <td>
+                            <div>
+                                제품 디테일
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                제품 구매날짜
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                제품 주문번호
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                상태
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                상태
+                            </div>
+                        </td>
+                    </tr>
+                )
+            })
+        }
+        
+    };
 
     const OrderList = styled.section`
         height : 250px;
@@ -150,9 +172,10 @@ export const OrderList = ({data}) => {
                     </tr>
                 </thead>
                 <tbody className="orderListTableBody">
-                    {tableList}
+                    {tableList({loading, data:currentPosts})}
                 </tbody>
             </table>
+            <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={paginate}></Pagination>
         </OrderList>
     )
 }
