@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { reset } from 'styled-reset';
 import bg_img from 'assets/DSC09046.jpg';
 import Playfair_Display_Regular from 'assets/fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf';
 import Playfair_Display_Medium from 'assets/fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf';
@@ -14,6 +15,8 @@ import NotoSerifKR_Medium from 'assets/fonts/Noto_Serif_KR/NotoSerifKR-Regular.o
 import NotoSerifKR_Bold from 'assets/fonts/Noto_Serif_KR/NotoSerifKR-Bold.otf';
 
 const GlobalStyle = createGlobalStyle`
+    ${reset}
+    
     * {
         box-sizing: border-box;
         margin: 0;

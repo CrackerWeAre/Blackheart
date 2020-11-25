@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import bgimg from 'assets/DSC09046.jpg';
-import HeaderContainer from 'containers/common/HeaderContainer';
 import SnsLink from 'components/common/SnsLink';
 
 const MainWrapper = styled.div`
@@ -27,7 +26,6 @@ const MainWrapper = styled.div`
 const MainPage = () => {
     return (
         <MainWrapper>
-            <HeaderContainer />
             <SnsLink />
         </MainWrapper>
     );

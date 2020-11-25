@@ -47,12 +47,12 @@ const filterOptions = {
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-`;
-
+  .container {
+    display: flex;
+    margin: 20px 0!important;
+    margint-top: 150px;
+  }
+`
 const StyledTable = styled(Table)`
   table td th {
     font-size: 12px;
