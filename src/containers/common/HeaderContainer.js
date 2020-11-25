@@ -1,20 +1,17 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from 'components/common/Header';
-import { adminLogout } from 'modules/admin/auth'; 
-import { userLogout } from 'modules/user/auth';
+import { logout } from 'modules/auth';
 
 const HeaderContainer = ({ ...props }) => {
-    const { user, admin } = useSelector(({ userAuth, adminAuth }) => ({
-        user: userAuth.user,
-        admin: adminAuth.admin,
+    const { user } = useSelector(({ auth }) => ({
+        user: auth.user,
     }));
     const dispatch = useDispatch();
     const onLogout = () => {
-        dispatch(adminLogout());
-        dispatch(userLogout());
+        dispatch(logout());
     }
-    return <Header user={user} admin={admin} onLogout={onLogout} {...props} />;
+    return <Header user={user} onLogout={onLogout} {...props} />;
 };
 
 export default HeaderContainer;

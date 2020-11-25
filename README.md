@@ -9,8 +9,8 @@
 * Hook
 * react-router-dom
 * styled-components
-* react-helmet-async
+* axios
 * Redux
 * redux-saga
-* axios
+* redux-logger
 * immer

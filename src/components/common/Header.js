@@ -3,13 +3,11 @@ import styled, { css } from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: space-between;
   width: 100%;
   height: 100px;
-  ${(props) =>
-    props.adminheader && 'border-bottom: 1px solid rgba(0, 0, 0, 0.1);'};
 
   h1 {
     position: absolute;
@@ -40,15 +38,13 @@ const HeaderWrapper = styled.header`
     z-index: 9999;
   }
 
-  nav ul li {
-  }
-
   nav ul li a {
     font-size: 1rem;
     margin: 0 10px;
     font-weight: 500;
     z-index: 9999;
     color: #ffffff;
+    font-family: 'Poppins', serif;
   }
 
   ${(props) => props.dark && css`
@@ -65,18 +61,20 @@ const HeaderWrapper = styled.header`
 `;
 
 const AdminHeaderWrapper = styled(HeaderWrapper)`
+    position: relative;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     h1 {
         position: absolute;
         top: 0;
         left: 8%;
-        transform: translate(-50%, 50%);
+        transform: translate(-50%, 35%);
         margin: 15px 0 0 30px;
         padding-top: 0;
+        font-family: 'Playfair Display', serif;
 
         a {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 
@@ -86,14 +84,10 @@ const AdminHeaderWrapper = styled(HeaderWrapper)`
         font-weight: 500;
         z-index: 9999;
         color: #000;
-      }
-
-    .admin_name {
-        text-decoration: underline;
     }
 `;
 
-const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
+const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
   return (
     <>
         {adminheader ? (
@@ -105,11 +99,10 @@ const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
                     <nav>
                         <h1 className="sr-only">Navigation Menu</h1>
                         <ul>
-                            <li>
-                            <Link to="/">Home</Link>
-                            </li>
+                            <Link to="/">
+                                Home
+                            </Link>
                         </ul>
-
                     </nav>
                 </AdminHeaderWrapper>
             </>
@@ -130,7 +123,10 @@ const Header = ({ user, admin, onLogout, adminheader, ...otherProps }) => {
                                 <Link to="/product/shop">Shop</Link>
                             </li>
                             <li>
-                                <Link to="/main/login">Sign In</Link>
+                                <Link to="/member/login">Log In</Link>
+                            </li>
+                            <li>
+                                <Link to="/member/join">Sign Up</Link>
                             </li>
                             <li>
                                 <Link to="/admin/main">Admin</Link>
