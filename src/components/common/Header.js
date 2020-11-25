@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -65,7 +65,7 @@ const AdminHeaderWrapper = styled(HeaderWrapper)`
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     h1 {
-        position: absolute;
+        position: relative;
         top: 0;
         left: 8%;
         transform: translate(-50%, 35%);
