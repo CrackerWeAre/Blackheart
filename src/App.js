@@ -1,21 +1,27 @@
 import React from 'react';
-import { Router, Route, Switch, withRouter } from 'react-router-dom';
-import MainRouter from 'routers/MainRouter';
-import AdminRouter from 'routers/AdminRouter';
-import UserAuthRouter from 'routers/UserRouter';
-import MyPageRouter from 'routers/MyPageRouter';
 import GlobalStyle from 'GlobalStyle';
-import HeaderContainer from 'containers/common/HeaderContainer';
+import { Router, Route, Switch, withRouter } from 'react-router-dom';
+import MainRouter from 'routes/MainRouter';
+import AdminRouter from 'routes/AdminRouter';
+import UserRouter from 'routes/UserRouter';
+import MyPageRouter from 'routes/MyPageRouter';
+import ProductRouter from 'routes/ProductRouter';
+import CompanyRouter from 'routes/CompanyRouter';
+import BoardRouter from 'routes/BoardRouter';
 
 const App = ({ history }) => {
   return (
     <>
       <Router history={history}>
         <Switch>
-          <Route path={["/", "/main"]} exact component={MainRouter} />
-          <Route path="/admin" exact component={AdminRouter} />
-          <Route path="/member" exact component={UserAuthRouter} />
-          <Route path="/mypage" exact component={MyPageRouter} />
+          <Route path="/" exact component={MainRouter} />
+          <Route path="/main" component={MainRouter} />
+          <Route path="/admin" component={AdminRouter} />
+          <Route path="/member" component={UserRouter} />
+          <Route path="/mypage" component={MyPageRouter} />
+          <Route path="/product" component={ProductRouter} />
+          <Route path="/company" component={CompanyRouter} />
+          <Route path="/board" component={BoardRouter} />
         </Switch>
         <GlobalStyle />
       </Router>

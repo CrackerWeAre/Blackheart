@@ -16,8 +16,8 @@ const SnsWrapper = styled.footer`
     
     a {
         color: #ffffff;
-        font-size: 1.25rem;
-        padding: 10px;
+        font-size: 1.45rem;
+        padding: 20px;
     }
 `;
 
