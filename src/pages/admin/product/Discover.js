@@ -8,8 +8,6 @@ import 'semantic-ui-css/semantic.min.css';
 const AdminProductDiscover = () => {
   return (
     <>
-      <HeaderContainer adminheader dark />
-      <Drawer />
     </>
   );
 };

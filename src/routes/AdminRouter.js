@@ -6,6 +6,13 @@ import Drawer from 'components/common/Drawer';
 import AdminMainPage from 'pages/admin/AdminMainPage';
 import AdminUserDiscover from 'pages/admin/user/Discover';
 import AdminUserOrderDiscover from 'pages/admin/user/OrderDiscover';
+import AdminLoginPage from 'pages/admin/auth/AdminLoginPage';
+import AdminJoinPage from 'pages/admin/auth/AdminJoinPage';
+import AdminProductCreate from 'pages/admin/product/Create';
+import AdminProductDiscover from 'pages/admin/product/Discover';
+import AdminOrderDiscover from 'pages/admin/order/Discover';
+import AdminOrderDelivery from 'pages/admin/order/Delivery';
+import AdminBoardDiscover from 'pages/admin/board/Discover';
 
 const AdminRouter = ({ history }) => {
     return (
@@ -14,7 +21,6 @@ const AdminRouter = ({ history }) => {
             <HeaderContainer adminheader dark />
             <Drawer />
             <Switch>
-                <Route path="/admin" component={AdminMainPage} exact />
                 {/* Admin_Page */}
                 <Route component={AdminMainPage} path="/admin/main" exact />
                 <Route component={AdminLoginPage} path={["/admin", "/admin/login"]} exact />

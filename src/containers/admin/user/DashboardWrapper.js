@@ -14,18 +14,19 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+`;
 
-  h6 {
-    position: absolute;
-    left: 20px;
-    top: -20px;
-    font-size: 1rem;
-    font-weight: 600;
-  }
-
-  span {
-    transfrom: translateY(-20px);
-  }
+const BackgroundWrapper = styled.div`
+  margin: 30px 0 15px;
+  padding: 30px 20px;
+  border-radius: 1px;
+  border: 1px solid #ddd;
+  background: #fff;
+  width: 95%;
+  justify-content: center;
+  -webkit-box-shadow: 0 2px 1px 0 rgba(205,211,222,1);
+  -moz-box-shadow: 0 2px 1px 0 rgba(205,211,222,1);
+  box-shadow: 0 2px 1px 0 rgba(205,211,222,1);
 `;
 
 const DashboardWrapper = () => {

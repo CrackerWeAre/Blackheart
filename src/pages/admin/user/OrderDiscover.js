@@ -9,8 +9,7 @@ import 'semantic-ui-css/semantic.min.css';
 const AdminUserOrderDiscover = () => {
   return (
     <>
-      <HeaderContainer adminheader dark />
-      <Drawer />
+
     </>
   );
 };
