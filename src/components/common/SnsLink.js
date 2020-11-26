@@ -12,7 +12,7 @@ const SnsWrapper = styled.footer`
     bottom: 0;
     transform: translateY(-40%);
     z-index: 9999;
-    margin-right: 50px;
+    margin-right: 3vw;
     
     a {
         color: #ffffff;
@@ -28,7 +28,7 @@ const SnsLink = () => {
                 <FontAwesomeIcon icon={faInstagram} />
             </a>
             <a href="https://twitter.com/blackheart_kr" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                    <FontAwesomeIcon icon={faTwitter} />
+                <FontAwesomeIcon icon={faTwitter} />
             </a>
         </SnsWrapper>
     );

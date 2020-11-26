@@ -59,6 +59,10 @@ const GlobalStyle = createGlobalStyle`
     visibility: hidden;
     }
 
+    .ad_bb {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
     /* Fonts */
     @font-face {
         font-family: 'Playfair Display';

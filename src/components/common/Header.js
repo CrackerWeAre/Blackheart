@@ -1,121 +1,79 @@
 import React from 'react';
+// eslint-disable-next-line
 import styled, { css } from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100px;
-
-  h1 {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    margin-left: 0;
-    padding-top: 2px;
-    z-index: 9999;
-    font-family: 'Playfair Display', serif;
-
-    a {
-      text-transform: uppercase;
-      font-size: 2rem;
-      color: #ffffff;
-    }
-  }
-
-  nav ul {
-    position: absolute;
+    position: ${props => props.main ? 'absolute' : 'relative'};
     display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 50%;
-    right: 0;
-    transform: translate(0%, -50%);
-    margin-right: 35px;
-    z-index: 9999;
-  }
-
-  nav ul li a {
-    font-size: 1rem;
-    margin: 0 10px;
-    font-weight: 500;
-    z-index: 9999;
-    color: #ffffff;
-    font-family: 'Poppins', serif;
-  }
-
-  ${(props) => props.dark && css`
-      h1 {
-        a {
-          color: #130d14;
-        }
-      }
-
-      nav ul li a {
-        color: #130d14;
-      }
-    `}
-`;
-
-const AdminHeaderWrapper = styled(HeaderWrapper)`
-    position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
 
     h1 {
         position: relative;
         top: 0;
-        left: 8%;
-        transform: translate(-50%, 35%);
-        margin: 15px 0 0 30px;
-        padding-top: 0;
+        left: 3vw;
+        transform: translate(0%, 60%);
+        z-index: 9999;
         font-family: 'Playfair Display', serif;
 
         a {
-            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: ${props => props.main ? '#fff' : '#130d14'};
         }
     }
 
-    nav ul li a {
-        font-size: 1rem;
-        margin: 0 10px;
-        font-weight: 500;
+    nav ul {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 50%;
+        right: 0;
+        transform: translate(0%, -50%);
+        margin-right: 3vw;
         z-index: 9999;
-        color: #000;
+
+        li a {
+            font-size: 1rem;
+            margin: 0 10px;
+            font-weight: 400;
+            color: ${props => props.main ? '#fff' : '#130d14'};
+            font-family: 'Poppins', serif;
+        }
     }
 `;
 
 const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
+    console.log({ adminheader, ...otherProps });
   return (
     <>
-        {adminheader ? (
-            <>
-                <AdminHeaderWrapper {...otherProps}>
-                    <h1 className="logo">
-                        <Link to="/admin">BlackHeart</Link>
-                    </h1>
-                    <nav>
-                        <h1 className="sr-only">Navigation Menu</h1>
-                        <ul>
-                            <Link to="/">
-                                Home
-                            </Link>
-                        </ul>
-                    </nav>
-                </AdminHeaderWrapper>
-            </>
-        ) : (
-            <>
-                <HeaderWrapper {...otherProps}>
-                    <h1>
-                        <Link to="/">Blackheart</Link>
-                    </h1>
+        <HeaderWrapper {...otherProps} className={adminheader && 'ad_bb'}>
+            <h1>
+                {adminheader ? (
+                    <Link to="/admin">BlackHeart</Link>
+                ) : (
+                    <Link to="/">Blackheart</Link>
+                )}
+                
+            </h1>
 
-                    <nav>
-                        <ul>
-                            <h1 className="sr-only">Navigation Menu</h1>
+            <nav>
+                <ul>
+                    <h1 className="sr-only">Navigation Menu</h1>
+                    {adminheader ? (
+                        <>
+                            <li>
+                                <Link to="/">
+                                    Home
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        <>
                             <li>
                                 <Link to="/company/about">About</Link>
                             </li>
@@ -131,11 +89,11 @@ const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
                             <li>
                                 <Link to="/admin/main">Admin</Link>
                             </li>
-                        </ul>
-                    </nav>
-                </HeaderWrapper>
-            </>
-        )}
+                        </>
+                    )}
+                </ul>
+            </nav>
+        </HeaderWrapper>
     </>
     );
 };
