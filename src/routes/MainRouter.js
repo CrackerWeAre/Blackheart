@@ -8,7 +8,7 @@ const MainRouter = ({ history }) => {
     return (
         <>
             <GlobalStyle />
-            <HeaderContainer />
+            <HeaderContainer main />
             <Switch>
                 <Route path="/" component={MainPage} exact />
                 <Route path="/main" component={MainPage} exact />
