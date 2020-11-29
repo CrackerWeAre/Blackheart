@@ -6,7 +6,7 @@ import AuthForm from 'components/auth/AuthForm';
 
 const UserLoginForm = ({ history }) => {
     const dispatch = useDispatch();
-    const { form } = useSelector(({ auth }) => ({
+    const { form, user, userError } = useSelector(({ auth }) => ({
         form: auth.login,
         user: auth.user,
         userError: auth.userError,
@@ -20,6 +20,7 @@ const UserLoginForm = ({ history }) => {
             value
         }));
     }
+
     const onSubmit = e => {
         e.preventDefault();
         const { email, password } = form;

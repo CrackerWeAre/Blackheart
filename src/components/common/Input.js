@@ -3,18 +3,21 @@ import styled, { css } from 'styled-components';
 
 const CustomInput = styled.input`
     font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
+    font-size: 1rem;
     border: 1px solid #afb3b9;
     border-radius: 4px;
-    padding-bottom: 1rem;
+    padding: .53125rem .75rem;
     margin-top: 1rem;
     outline: none;
     width: 100%;
-    padding: 10px;
+    line-height: 1.714286;
 
     &:focus {
-        outline: none;
-        border: 2px solid #130D14;
+        color: #130D14;
+        background: #fff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(96, 154, 233, .25);
+        border-color: #130D14;
     }
 
     & + & {

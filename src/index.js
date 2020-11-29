@@ -12,7 +12,7 @@ import { createLogger } from 'redux-logger';
 
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware, logger)));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);
 

@@ -16,9 +16,9 @@ const AuthTemplateWrapper = styled.div`
 
 const AuthBlock = styled.div`
     position: fixed;
-    margin-top: 25px;
+    margin-top: 1.563rem;
     padding: 40px 60px;
-    max-width: 600px;
+    width: 58vh;
 `;
 
 const AuthTemplate = ({ children }) => {
