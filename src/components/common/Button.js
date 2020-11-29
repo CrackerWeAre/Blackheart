@@ -11,9 +11,12 @@ const CustomButton = styled.button`
     border-radius: 4px;
     outline: none;
     text-align: center;
+    padding: .53125rem .75rem;
+    width: 100%;
+    line-height: 1.714286;
 
     &:focus {
-        outline: none;
+        outline: 0;
     }
 
     ${props => props.fullWidth && css`
@@ -33,8 +36,8 @@ const CustomButton = styled.button`
         border: none;
         box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.12);
         font-size: 0.8rem;
-        min-width: 200px;
-        height: 45px;
+        min-width: 2.5rem;
+        height: 2.5rem;
 
         svg {
             height: 24px;

@@ -1,9 +1,13 @@
 import React from 'react';
+import AuthTemplate from 'components/auth/AuthTemplate';
+import UserJoinForm from 'containers/user/UserJoinForm';
 
 const UserJoinPage = () => {
     return (
         <>
-            <div>회원가입 페이지</div>
+            <AuthTemplate>
+                <UserJoinForm />
+            </AuthTemplate>
         </>
     );
 };
