@@ -11,7 +11,7 @@ const DrawerWrapper = styled.aside`
     font-family: 'Nanum Gothic', sans-serif;
     position: fixed;
     height: 100%;
-    width: 180px;
+    width: 200px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     letter-spacing: -0.1rem;
     // margin-top: 100px;

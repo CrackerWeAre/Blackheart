@@ -1,6 +1,5 @@
 import React from 'react';
-// eslint-disable-next-line
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/bh_logo1.svg';
 
