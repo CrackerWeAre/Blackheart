@@ -87,6 +87,9 @@ const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
                             <li>
                                 <Link to="/admin/main">Admin</Link>
                             </li>
+                            <li>
+                                <Link to="/mypage">My Pgae</Link>
+                            </li>
                         </>
                     )}
                 </ul>
