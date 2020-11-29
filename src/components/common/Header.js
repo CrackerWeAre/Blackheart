@@ -2,31 +2,29 @@ import React from 'react';
 // eslint-disable-next-line
 import styled, { css } from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
+import { ReactComponent as Logo } from 'assets/bh_logo1.svg';
 
 const HeaderWrapper = styled.header`
-    position: ${props => props.main ? 'absolute' : 'relative'};
+    position: ${props => props.main ? 'absolute!important' : 'relative'};
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 100vw;
     height: 100px;
 
-    h1 {
+    & > a {
         position: absolute;
         top: 0;
         left: 3vw;
-        transform: translate(0%, 60%);
+        transform: translate(0%, 14%);
         z-index: 9999;
-        font-family: 'Playfair Display', serif;
-
-        a {
-            text-transform: uppercase;
-            font-size: 1.85rem;
-            font-weight: 700;
-            color: ${props => props.main ? '#fff' : '#130d14'};
-        }
     }
 
     nav ul {
+        /* position: absolute;
+        top: 0;
+        left: 2.8vw;
+        z-index: 9999;
+        transform: translate(0%, 100%); */
         position: absolute;
         display: flex;
         justify-content: center;
@@ -38,29 +36,30 @@ const HeaderWrapper = styled.header`
         z-index: 9999;
 
         li a {
-            font-size: 1rem;
-            margin: 0 10px;
+            font-size: 0.938rem;
+            margin: 0.625rem;
             font-weight: 400;
             color: ${props => props.main ? '#fff' : '#130d14'};
+            /* color: #000; */
             font-family: 'Poppins', serif;
         }
     }
 `;
 
 const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
-    console.log({ adminheader, ...otherProps });
   return (
     <>
-        <HeaderWrapper {...otherProps} className={adminheader && 'ad_bb'}>
-            <h1>
-                {adminheader ? (
-                    <Link to="/admin">BlackHeart</Link>
-                ) : (
-                    <Link to="/">Blackheart</Link>
-                )}
+        <HeaderWrapper {...otherProps}>
+            {adminheader ? (
+                <Link to="/admin">
+                    <Logo weight="5rem" height="5rem" fill="#000" stroke="#fff" />
+                </Link>
+            ) : (
+                <Link to="/">
+                    <Logo weight="5rem" height="5rem" fill="#000" stroke="#fff" />
+                </Link>
+            )}
                 
-            </h1>
-
             <nav>
                 <ul>
                     <h1 className="sr-only">Navigation Menu</h1>

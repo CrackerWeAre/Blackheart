@@ -1,10 +1,14 @@
 import React from 'react';
-import HeaderContainer from 'containers/common/HeaderContainer';
+import AuthTemplate from 'components/auth/AuthTemplate';
+import AdminJoinForm from 'containers/admin/AdminJoinForm';
+
 
 const AdminJoinPage = () => {
     return (
         <>
-            관리자 회원가입 페이지
+            <AuthTemplate>
+                <AdminJoinForm />
+            </AuthTemplate>
         </>
     );
 };
