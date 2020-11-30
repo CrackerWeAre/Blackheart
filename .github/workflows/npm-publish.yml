@@ -1,0 +1,39 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Build React
+
+on:
+  push:
+    branches:
+    - master
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-18.04
+    strategy:
+        matrix:
+          node-version: [15.x]
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Checkout source code.   # 레포지토리 체크아웃
+        uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install Dependencies   # 의존 파일 설치
+        run: npm install
+        
+#       - name: Update Dependencies   # 의존 파일 설치
+#         working-directory: ./looks
+#         run: sudo npm install -g react-scripts
+
+      - name: Build                   # React Build
+        run: npm run build
+        env:
+           CI: false
