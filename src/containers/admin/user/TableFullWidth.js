@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { StyledPagination } from 'components/common/StyledPagination';
 import { userDiscoverAPI } from 'lib/api/admin/User';
 import { Button, Checkbox, Icon, Table } from 'semantic-ui-react';
-
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  font-size: 12px;
+  font-size: 11px;
   margin-top: 20px;
 
   .table .menu .button {
@@ -19,37 +18,60 @@ const TableFullWidth = () => {
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const checkBox = useRef();
+  const [checkList, setCheckList] = useState([]);
 
-  const PaginationExampleShorthand = () => (
+  const handlePaginationChange = (page) => {
+    setPage(page);
+  }
+
+  const pushCheckList = (idx) => {
+    if(checkList.includes(idx)){
+      setCheckList(oldArray => oldArray.filter(item => item !== idx))
+    }else{
+      setCheckList(oldArray => [...oldArray, idx]);
+    }
+  }
+
+  const deleteRows = async () => {
+    try {
+      const response = await userDeleteAPI({uid});
+      
+    } catch(e){
+
+    }
+  }
+
+  const fetchUsers = async () => {
+    try {
+      setCheckList([]);
+      setError(null);
+      setUsers(null);
+      setLoading(true);
+      const response = await userDiscoverAPI({ page, maxResult: 10 });
+      setUsers(response.data.result);
+    } catch (e) {
+      setError(e);
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [page]);
+
+  const PaginationShorthand = () => (
     <StyledPagination
-      defaultActivePage={1}
+      activePage={page}
       firstItem={null}
       lastItem={null}
       pointing
       secondary
-      totalPages={3}
+      totalPages={5}
+      onPageChange={e=>handlePaginationChange(e.target.getAttribute('value'))}
     />
   )
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setError(null);
-        setUsers(null);
-        setLoading(true);
-
-        const response = await userDiscoverAPI({ page, maxResult: 50 });
-        setUsers(response.data);
-      } catch (e) {
-        setError(e);
-        console.log(e);
-      }
-      setLoading(false);
-    };
-
-    fetchUsers();
-  }, []);
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!users) return null;
@@ -72,11 +94,11 @@ const TableFullWidth = () => {
             <Table.HeaderCell>가입일</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        {users.map((user) => (
+        {users.map((user, idx) => (
           <Table.Body key={user.uID}>
             <Table.Row>
               <Table.Cell collapsing>
-                <Checkbox ref={checkBox}/>
+                <Checkbox onClick={()=>pushCheckList(idx)}/>
               </Table.Cell>
               <Table.Cell>{user.uID}</Table.Cell>
               <Table.Cell>{user.uName}</Table.Cell>
@@ -93,15 +115,16 @@ const TableFullWidth = () => {
         ))}
       </Table>
 
-      <PaginationExampleShorthand></PaginationExampleShorthand>
+      <PaginationShorthand></PaginationShorthand>
       
       <Button
         className="button"
         floated="right"
         icon
         labelPosition="left"
-        color=""
+        color={checkList.length>0 ? "red" : ""}
         size="small"
+        onClick={()=>deleteRows}
       >
         <Icon name="user" /> Remove
       </Button>
@@ -110,7 +133,7 @@ const TableFullWidth = () => {
         floated="right"
         icon
         labelPosition="left"
-        color=""
+        color={checkList.length>0 ? "green" : ""}
         size="small"
       >
         <Icon name="user" /> Modify
