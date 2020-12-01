@@ -1,19 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledPagination } from 'components/common/StyledPagination';
-import { userDiscoverAPI } from 'lib/api/admin/User';
-import { Button, Checkbox, Icon, Table } from 'semantic-ui-react';
+import { userDeleteAPI,userDiscoverAPI } from 'lib/api/admin/User';
+import { Button, Checkbox, Icon, Table, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   font-size: 11px;
-  margin-top: 20px;
+  margin-top: 10px;
 
   .table .menu .button {
-    margin: 10px;
+    margin: 5px;
+  }
+
+  .ui.input {
+    width: 50%!important;
+    max-width: 50%!important;
   }
 `;
 
 const TableFullWidth = () => {
+  const [modify, setModify] = useState(false);
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -24,21 +30,35 @@ const TableFullWidth = () => {
     setPage(page);
   }
 
-  const pushCheckList = (idx) => {
-    if(checkList.includes(idx)){
-      setCheckList(oldArray => oldArray.filter(item => item !== idx))
+  const pushCheckList = (uID) => {
+    if(checkList.includes(uID)){
+      setCheckList(oldArray => oldArray.filter(item => item !== uID))
     }else{
-      setCheckList(oldArray => [...oldArray, idx]);
+      setCheckList(oldArray => [...oldArray, uID]);
     }
   }
 
-  const deleteRows = async () => {
-    try {
-      const response = await userDeleteAPI({uid});
-      
-    } catch(e){
+  const toggleModify = () => {
+    setModify(prevState => !prevState);
+  }
 
-    }
+  const deleteRow = (uID) => {
+    return new Promise(resolve => {
+      try {
+        const response = userDeleteAPI({uID});
+        resolve();
+      } catch(e){
+        console.log(e)
+      }
+    })
+
+  }
+
+  const deleteRows = async () => {
+    const promises = checkList.map(uID => deleteRow(uID));
+    await Promise.all(promises);
+    window.location.reload();
+
   }
 
   const fetchUsers = async () => {
@@ -48,6 +68,7 @@ const TableFullWidth = () => {
       setUsers(null);
       setLoading(true);
       const response = await userDiscoverAPI({ page, maxResult: 10 });
+      console.log(response.data)
       setUsers(response.data.result);
     } catch (e) {
       setError(e);
@@ -98,10 +119,10 @@ const TableFullWidth = () => {
           <Table.Body key={user.uID}>
             <Table.Row>
               <Table.Cell collapsing>
-                <Checkbox onClick={()=>pushCheckList(idx)}/>
+                <Checkbox onClick={()=>{pushCheckList(user.uID);toggleModify()}}/>
               </Table.Cell>
               <Table.Cell>{user.uID}</Table.Cell>
-              <Table.Cell>{user.uName}</Table.Cell>
+              <Table.Cell>{modify? <Input transparent placeholder={user.uName} /> :user.uName}</Table.Cell>
               <Table.Cell>{user.uEmail}</Table.Cell>
               <Table.Cell>{user.uGender}</Table.Cell>
               <Table.Cell>{user.uAddr}</Table.Cell>
@@ -124,7 +145,7 @@ const TableFullWidth = () => {
         labelPosition="left"
         color={checkList.length>0 ? "red" : ""}
         size="small"
-        onClick={()=>deleteRows}
+        onClick={()=>deleteRows()}
       >
         <Icon name="user" /> Remove
       </Button>
