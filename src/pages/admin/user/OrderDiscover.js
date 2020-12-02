@@ -1,16 +1,13 @@
 import React from 'react';
-import HeaderContainer from 'containers/common/HeaderContainer';
-import Drawer from 'components/common/Drawer';
-import DashboardWrapper from 'containers/admin/user/DashboardWrapper';
-
 import 'semantic-ui-css/semantic.min.css';
-
+import { AdminContentArea } from 'components/common/AdminContentArea';
+import { AdminHeadingArea } from 'components/common/AdminHeadingArea';
 
 const AdminUserOrderDiscover = () => {
   return (
-    <>
-
-    </>
+    <AdminContentArea>
+      <AdminHeadingArea title="회원관리" subTitle="주문회원 조회" />
+    </AdminContentArea>
   );
 };
 
