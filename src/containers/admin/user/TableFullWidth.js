@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 
 const TableFullWidth = () => {
   const [modify, setModify] = useState(false);
+  const [totalPage, setTotalPage] = useState(10);
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -68,7 +69,7 @@ const TableFullWidth = () => {
       setUsers(null);
       setLoading(true);
       const response = await userDiscoverAPI({ page, maxResult: 10 });
-      console.log(response.data)
+      setTotalPage(response.data.lastPage)
       setUsers(response.data.result);
     } catch (e) {
       setError(e);
@@ -88,7 +89,7 @@ const TableFullWidth = () => {
       lastItem={null}
       pointing
       secondary
-      totalPages={5}
+      totalPages={totalPage}
       onPageChange={e=>handlePaginationChange(e.target.getAttribute('value'))}
     />
   )
@@ -119,16 +120,16 @@ const TableFullWidth = () => {
           <Table.Body key={user.uID}>
             <Table.Row>
               <Table.Cell collapsing>
-                <Checkbox onClick={()=>{pushCheckList(user.uID);toggleModify()}}/>
+                <Checkbox onClick={()=>{pushCheckList(user.uID)}}/>
               </Table.Cell>
               <Table.Cell>{user.uID}</Table.Cell>
-              <Table.Cell>{modify? <Input transparent placeholder={user.uName} /> :user.uName}</Table.Cell>
+              <Table.Cell>{user.uName}</Table.Cell>
               <Table.Cell>{user.uEmail}</Table.Cell>
               <Table.Cell>{user.uGender}</Table.Cell>
               <Table.Cell>{user.uAddr}</Table.Cell>
               <Table.Cell>{user.uPhone}</Table.Cell>
               <Table.Cell>{user.uBirth}</Table.Cell>
-              <Table.Cell>{user.uLevel}</Table.Cell>
+              <Table.Cell>{modify? <Input transparent placeholder={user.uLevel} /> :user.uLevel}</Table.Cell>
               <Table.Cell>{user.uJoinPath}</Table.Cell>
               <Table.Cell>{user.uJoinDate}</Table.Cell>
             </Table.Row>
@@ -143,21 +144,22 @@ const TableFullWidth = () => {
         floated="right"
         icon
         labelPosition="left"
-        color={checkList.length>0 ? "red" : ""}
+        color={checkList.length>0 ? "red" : "grey"}
         size="small"
         onClick={()=>deleteRows()}
       >
-        <Icon name="user" /> Remove
+        <Icon name="user" /> 삭제
       </Button>
       <Button
         className="button"
         floated="right"
         icon
         labelPosition="left"
-        color={checkList.length>0 ? "green" : ""}
+        color={modify ? "green" : "grey"}
         size="small"
+        onClick={()=>toggleModify()}
       >
-        <Icon name="user" /> Modify
+        <Icon name="user" /> {modify ? "수정완료" : "수정하기"}
       </Button>
     </Wrapper>
   );
