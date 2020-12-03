@@ -8,6 +8,7 @@ import { OrderList } from 'pages/user/mypage/mypagemenu/myorder/OrderList';
 import { InfoEdit } from 'pages/user/mypage/mypagemenu/myinfo/InfoEdit';
 import { Review } from 'pages/user/mypage/mypagemenu/myorder/Review';
 import { Navibar } from 'pages/user/mypage/Navibar';
+import { Coupon } from 'pages/user/mypage/mypagemenu/myinfo/Coupon';
 
 
 const MyPageRouter = ({ history }) => {
@@ -29,6 +30,7 @@ const MyPageRouter = ({ history }) => {
                     <Route path="/mypage/myinfo" component={InfoEdit} />
                     <Route path="/mypage/orderlist" component={OrderList}/>
                     <Route path="/mypage/reviewlist" component={Review} />
+                    <Route path="/mypage/coupon" component={Coupon} />
                 </Switch>
             </MyPageDiv>
         </>

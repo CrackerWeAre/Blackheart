@@ -175,7 +175,7 @@ export const Review = () => {
                     {tableList({loading, data:currentPosts})}
                 </tbody>
             </table>
-            <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={paginate}></Pagination>
+            <Pagination  nowPage={itemListNum} postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={paginate}></Pagination>
         </ReviewList>
     )
 }

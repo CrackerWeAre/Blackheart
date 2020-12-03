@@ -29,10 +29,27 @@ const Pagination = ({nowPage, postsPerPage, totalPosts, paginate }) => {
     pageNumber.push(i);
   }
 
+  const pageSub = (nowPage) => {
+    if(nowPage===1){
+      paginate(1)
+    }else{
+      paginate(nowPage-1)
+    }
+  }
+
+  const pageAdd = (nowPage) => {
+    console.log(pageNumber.length)
+    if(nowPage===pageNumber.length){
+      paginate(pageNumber.length)
+    }else{
+      paginate(nowPage+1)
+    }
+  }
+
   return (
     <UlPagination>
       <li
-        onClick={() => paginate(nowPage-1)}
+        onClick={() => pageSub(nowPage)}
       >
         &laquo; 
       </li>
@@ -46,7 +63,7 @@ const Pagination = ({nowPage, postsPerPage, totalPosts, paginate }) => {
         </li>
       ))}
       <li
-        onClick={() => paginate(nowPage+11)}
+        onClick={() => pageAdd(nowPage)}
       >
         &raquo; 
       </li>

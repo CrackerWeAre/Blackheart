@@ -86,7 +86,8 @@ export const OrderList = ({data}) => {
 
         header ul li {
             display: inline-block;
-            margin-right: 16px;        }
+            margin-right: 16px;        
+        }
 
         ul {
             margin-bottom: 28px;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const NaviBar = styled.div`
     width : 250px;
-    padding : 50px 50px 0px 0px;
+    padding : 0px 50px 0px 0px;
     flex: none;
 
     section {
@@ -39,7 +39,7 @@ const NaviBar = styled.div`
 const NavHeader = styled.div`
     position: absolute;
     height: 250px; 
-    top: 150px;
+    top: 200px;
     left: 300px;
     width: calc(100% - 350px);
     background-color: #000000;
@@ -107,23 +107,23 @@ export const Navibar = () => {
                 <div className="naviHeader">
                     <div className="headerMain">
                         <div className="tabled full-width">
-                            <div className="tumbs table-cell vertical-middle">
-                                <div id="mypage_profile_img" className="img-circle"></div>
-                                <span className="sr-only">정보 수정</span>
+                            <div>
+                                <div></div>
+                                <span>정보 수정</span>
                             </div>
-                            <div className="nick text-default-dark table-cell vertical-middle no-margin-top">
+                            <div>
                                 <span>정윤도 님 안녕하세요.</span>
-                                <div className="body_font_color_50 text-15" id="order_total_price">누적 구매금액: 0원</div>
+                                <div>누적 구매금액: 0원</div>
                             </div>
                         </div>
                     </div>
                     <div className="headerPoint">
                         <p>포인트</p>
-                        <span className="text-bold text-32">1,500</span>
+                        <span>1,500</span>
                     </div>
                     <div className="headerCoupon">
                         <p>쿠폰</p>
-                        <span className="text-bold text-32">0</span>
+                        <span>0</span>
                     </div>
                 </div>
             </NavHeader>
@@ -146,10 +146,10 @@ export const Navibar = () => {
                     </ul>
                     <h3 className="infoListTitle">나의 계정설정</h3>
                     <ul className="infoListContents">
-                        <li className="infoListItem"><a>회원정보수정</a></li>
+                        <li className="infoListItem"><Link to="/mypage/myinfo">회원정보수정</Link></li>
                         <li className="infoListItem"><a>회원등급</a></li>
                         <li className="infoListItem"><a>마일리지현황</a></li>
-                        <li className="infoListItem"><a>쿠폰</a></li>
+                        <li className="infoListItem"><Link to="/mypage/coupon">쿠폰</Link></li>
                     </ul>
                     <h3 className="infoListTitle">고객센터</h3>
                     <ul className="infoListContents">
