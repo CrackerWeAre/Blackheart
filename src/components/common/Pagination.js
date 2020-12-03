@@ -34,7 +34,7 @@ const Pagination = ({nowPage, postsPerPage, totalPosts, paginate }) => {
       <li
         onClick={() => paginate(nowPage-1)}
       >
-        &laqui; 
+        &laquo; 
       </li>
       {pageNumber.map((pageNum) => (
         <li
@@ -48,7 +48,7 @@ const Pagination = ({nowPage, postsPerPage, totalPosts, paginate }) => {
       <li
         onClick={() => paginate(nowPage+11)}
       >
-        &raqui; 
+        &raquo; 
       </li>
     </UlPagination>
   );

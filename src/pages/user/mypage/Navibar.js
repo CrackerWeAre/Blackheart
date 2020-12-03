@@ -44,15 +44,89 @@ const NavHeader = styled.div`
     width: calc(100% - 350px);
     background-color: #000000;
     color: white;
+
+    .naviHeader {
+        padding: 50px 45px 50px 45px;
+        display: table;
+        width: 100% !important;
+        height: 100%;
+    }
+
+    .naviHeader .headerMain {
+        position: relative;
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+    }
+
+    .naviHeader .headerPoint {
+        position: relative;
+        width: 25%;
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+    }
+
+    .naviHeader .headerPoint::before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 100px;
+        position: absolute;
+        background: #e5e5e5;
+        left: 0;
+        top: 50%;
+        margin-top: -50px;
+    }
+
+    .naviHeader .headerCoupon {
+        position: relative;
+        width: 25%;
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+    }
+
+    .naviHeader .headerCoupon::before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 100px;
+        position: absolute;
+        background: #e5e5e5;
+        left: 0;
+        top: 50%;
+        margin-top: -50px;
+    }
+
 `
 export const Navibar = () => {
     return (
         <>
             <NavHeader>
-                    <div>
-                        aaaaaaa
+                <div className="naviHeader">
+                    <div className="headerMain">
+                        <div className="tabled full-width">
+                            <div className="tumbs table-cell vertical-middle">
+                                <div id="mypage_profile_img" className="img-circle"></div>
+                                <span className="sr-only">정보 수정</span>
+                            </div>
+                            <div className="nick text-default-dark table-cell vertical-middle no-margin-top">
+                                <span>정윤도 님 안녕하세요.</span>
+                                <div className="body_font_color_50 text-15" id="order_total_price">누적 구매금액: 0원</div>
+                            </div>
+                        </div>
                     </div>
-                </NavHeader>
+                    <div className="headerPoint">
+                        <p>포인트</p>
+                        <span className="text-bold text-32">1,500</span>
+                    </div>
+                    <div className="headerCoupon">
+                        <p>쿠폰</p>
+                        <span className="text-bold text-32">0</span>
+                    </div>
+                </div>
+            </NavHeader>
             <NaviBar>
                 <section className="shortInfo">
                     <div className="infoSummary">
