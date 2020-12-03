@@ -59,8 +59,8 @@ export const AdminHeadingArea = ({ title, subTitle }) => {
         <div className="mBreadcrumb">
           <ol>
             <li>홈</li>
-            <li>{title}</li>
-            <li>{subTitle}</li>
+            {title? <li>{title}</li>: <></>}
+            {subTitle? <li>{subTitle}</li>: <></>}
           </ol>
         </div>
       </div>
