@@ -60,7 +60,7 @@ export const Review = () => {
     const ReviewList = styled.section`
         height : 100%;
         width: calc(100% - 250px);
-        padding : 300px 0px 0px 0px;
+        padding : 200px 0px 0px 0px;
         flex: none;
         margin-top : 100px;
 
@@ -116,7 +116,7 @@ export const Review = () => {
             height: 70px;
             padding: 10px;
             box-sizing: border-box;
-            broder-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid #f5f5f5;
             text-align: center;
             vertical-align: middle;
             word-break: break-all;

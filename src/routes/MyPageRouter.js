@@ -9,6 +9,7 @@ import { InfoEdit } from 'pages/user/mypage/mypagemenu/myinfo/InfoEdit';
 import { Review } from 'pages/user/mypage/mypagemenu/myorder/Review';
 import { Navibar } from 'pages/user/mypage/Navibar';
 import { Coupon } from 'pages/user/mypage/mypagemenu/myinfo/Coupon';
+import { Grade } from 'pages/user/mypage/mypagemenu/myinfo/Grade';
 
 
 const MyPageRouter = ({ history }) => {
@@ -18,6 +19,7 @@ const MyPageRouter = ({ history }) => {
         padding-top: 100px;
         margin-left: 50px;
         margin-right: 50px;
+        
     `
     return (
         <>
@@ -31,6 +33,7 @@ const MyPageRouter = ({ history }) => {
                     <Route path="/mypage/orderlist" component={OrderList}/>
                     <Route path="/mypage/reviewlist" component={Review} />
                     <Route path="/mypage/coupon" component={Coupon} />
+                    <Route path="/mypage/grade" component={Grade} />
                 </Switch>
             </MyPageDiv>
         </>

@@ -147,7 +147,7 @@ export const Navibar = () => {
                     <h3 className="infoListTitle">나의 계정설정</h3>
                     <ul className="infoListContents">
                         <li className="infoListItem"><Link to="/mypage/myinfo">회원정보수정</Link></li>
-                        <li className="infoListItem"><a>회원등급</a></li>
+                        <li className="infoListItem"><Link to="/mypage/grade">회원등급</Link></li>
                         <li className="infoListItem"><a>마일리지현황</a></li>
                         <li className="infoListItem"><Link to="/mypage/coupon">쿠폰</Link></li>
                     </ul>
