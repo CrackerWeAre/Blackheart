@@ -22,8 +22,8 @@ const AdminRouter = ({ history }) => {
             <Drawer />
             <Switch>
                 {/* Admin_Page */}
-                <Route component={AdminMainPage} path="/admin/main" exact />
-                <Route component={AdminLoginPage} path={["/admin", "/admin/login"]} exact />
+                <Route component={AdminMainPage} path={["/admin","/admin/main"]} exact />
+                <Route component={AdminLoginPage} path="/admin/login" exact />
                 <Route component={AdminJoinPage} path="/admin/join" />
                 {/* 상품 관리 */}
                 <Route component={AdminProductCreate} path="/admin/product/create" exact />

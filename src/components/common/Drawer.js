@@ -14,6 +14,8 @@ const DrawerWrapper = styled.aside`
     width: 200px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     letter-spacing: -0.1rem;
+    background:white;
+    z-index:9999;
     // margin-top: 100px;
 
     h1 {

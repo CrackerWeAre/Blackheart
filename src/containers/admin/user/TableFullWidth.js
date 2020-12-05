@@ -1,55 +1,99 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledPagination } from 'components/common/StyledPagination';
-import { userDiscoverAPI } from 'lib/api/admin/User';
-import { Button, Checkbox, Icon, Table } from 'semantic-ui-react';
-
+import { userDeleteAPI,userDiscoverAPI } from 'lib/api/admin/User';
+import { Button, Checkbox, Icon, Table, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  font-size: 12px;
-  margin-top: 20px;
+  font-size: 11px;
+  margin-top: 10px;
 
   .table .menu .button {
-    margin: 10px;
+    margin: 5px;
+  }
+
+  .ui.input {
+    width: 50%!important;
+    max-width: 50%!important;
   }
 `;
 
 const TableFullWidth = () => {
+  const [modify, setModify] = useState(false);
+  const [totalPage, setTotalPage] = useState(10);
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const checkBox = useRef();
+  const [checkList, setCheckList] = useState([]);
 
-  const PaginationExampleShorthand = () => (
+  const handlePaginationChange = (page) => {
+    setPage(page);
+  }
+
+  const pushCheckList = (uID) => {
+    if(checkList.includes(uID)){
+      setCheckList(oldArray => oldArray.filter(item => item !== uID))
+    }else{
+      setCheckList(oldArray => [...oldArray, uID]);
+    }
+  }
+
+  const toggleModify = () => {
+    setModify(prevState => !prevState);
+  }
+
+  const deleteRow = (uID) => {
+    return new Promise(resolve => {
+      try {
+        const response = userDeleteAPI({uID});
+        resolve();
+      } catch(e){
+        console.log(e)
+      }
+    })
+
+  }
+
+  const deleteRows = async () => {
+    const promises = checkList.map(uID => deleteRow(uID));
+    await Promise.all(promises);
+    window.location.reload();
+
+  }
+
+  const fetchUsers = async () => {
+    try {
+      setCheckList([]);
+      setError(null);
+      setUsers(null);
+      setLoading(true);
+      const response = await userDiscoverAPI({ page, maxResult: 10 });
+      setTotalPage(response.data.lastPage)
+      setUsers(response.data.result);
+    } catch (e) {
+      setError(e);
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [page]);
+
+  const PaginationShorthand = () => (
     <StyledPagination
-      defaultActivePage={1}
+      activePage={page}
       firstItem={null}
       lastItem={null}
       pointing
       secondary
-      totalPages={3}
+      totalPages={totalPage}
+      onPageChange={e=>handlePaginationChange(e.target.getAttribute('value'))}
     />
   )
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setError(null);
-        setUsers(null);
-        setLoading(true);
-
-        const response = await userDiscoverAPI({ page, maxResult: 50 });
-        setUsers(response.data);
-      } catch (e) {
-        setError(e);
-        console.log(e);
-      }
-      setLoading(false);
-    };
-
-    fetchUsers();
-  }, []);
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!users) return null;
@@ -72,11 +116,11 @@ const TableFullWidth = () => {
             <Table.HeaderCell>가입일</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        {users.map((user) => (
+        {users.map((user, idx) => (
           <Table.Body key={user.uID}>
             <Table.Row>
               <Table.Cell collapsing>
-                <Checkbox ref={checkBox}/>
+                <Checkbox onClick={()=>{pushCheckList(user.uID)}}/>
               </Table.Cell>
               <Table.Cell>{user.uID}</Table.Cell>
               <Table.Cell>{user.uName}</Table.Cell>
@@ -85,7 +129,7 @@ const TableFullWidth = () => {
               <Table.Cell>{user.uAddr}</Table.Cell>
               <Table.Cell>{user.uPhone}</Table.Cell>
               <Table.Cell>{user.uBirth}</Table.Cell>
-              <Table.Cell>{user.uLevel}</Table.Cell>
+              <Table.Cell>{modify? <Input transparent placeholder={user.uLevel} /> :user.uLevel}</Table.Cell>
               <Table.Cell>{user.uJoinPath}</Table.Cell>
               <Table.Cell>{user.uJoinDate}</Table.Cell>
             </Table.Row>
@@ -93,27 +137,29 @@ const TableFullWidth = () => {
         ))}
       </Table>
 
-      <PaginationExampleShorthand></PaginationExampleShorthand>
+      <PaginationShorthand></PaginationShorthand>
       
       <Button
         className="button"
         floated="right"
         icon
         labelPosition="left"
-        color=""
+        color={checkList.length>0 ? "red" : "grey"}
         size="small"
+        onClick={()=>deleteRows()}
       >
-        <Icon name="user" /> Remove
+        <Icon name="user" /> 삭제
       </Button>
       <Button
         className="button"
         floated="right"
         icon
         labelPosition="left"
-        color=""
+        color={modify ? "green" : "grey"}
         size="small"
+        onClick={()=>toggleModify()}
       >
-        <Icon name="user" /> Modify
+        <Icon name="user" /> {modify ? "수정완료" : "수정하기"}
       </Button>
     </Wrapper>
   );
