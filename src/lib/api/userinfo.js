@@ -25,8 +25,8 @@ export const mileage = ({email, token}) => apis({
 export const userInfo = ({email, token}) => apis({
     method: 'GET',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    data: qs.stringify({ 'uEmail': email, 'token': token}),
-    url: '/'
+    params: { 'uEmail': email, 'token': token},
+    url: 'https://blackheart.sparker.kr:8080/user/detail'
 });
 
 export const userInfoUpdate = ({userid, email, token, name, gender, address, post, phone, birth}) => apis({
@@ -36,11 +36,11 @@ export const userInfoUpdate = ({userid, email, token, name, gender, address, pos
     url: '/'
 });
 
-export const userOrder = ({email, token}) => apis({
+export const userOrder = ({id, token}) => apis({
     method: 'GET',
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    data: qs.stringify({ 'uEmail': email, 'token': token}),
-    url: '/order/list'
+    headers: { 'content-type': 'multipart/form-data' },
+    params: { 'uID': id, 'token': token},
+    url: 'https://blackheart.sparker.kr:8080/order/list'
 });
 
 export const userReview = ({email, token}) => apis({
