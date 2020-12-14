@@ -1,9 +1,10 @@
 // 리덕스 모듈 => 액션/액션 생성함수/리듀서
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
+// eslint-disable-next-line
 import { takeLatest, call } from 'redux-saga/effects';
 import createRequestSaga, { createRequestActionTypes } from 'lib/createRequestSaga';
-import * as authAPI from 'lib/api/auth';
+import * as authAPI from 'lib/api/userinfo';
 
 // 액션 타입
 const CHANGE_FIELD = 'userinfo/CHANGE_FIELD';
@@ -27,14 +28,15 @@ export const changeField = createAction(CHANGE_FIELD, ({ form, key, value }) => 
 }));
 
 export const initializeForm = createAction(INITIALIZE_FORM, form => form); // join, login
-
+// eslint-disable-next-line
 export const cart = createAction(CART, ({}) => ({
 
 }));
+// eslint-disable-next-line
 export const coupon = createAction(COUPON, ({}) => ({
 
 }));
-
+// eslint-disable-next-line
 export const mileage = createAction(MILEAGE, ({}) => ({
 
 }));
