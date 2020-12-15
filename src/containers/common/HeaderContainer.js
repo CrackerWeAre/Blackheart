@@ -4,14 +4,19 @@ import Header from 'components/common/Header';
 import { logout } from 'modules/auth';
 
 const HeaderContainer = ({ ...props }) => {
-    const { user } = useSelector(({ auth }) => ({
-        user: auth.user,
+    const { currentUser } = useSelector(({ auth }) => ({
+        currentUser: auth.currentUser,
     }));
     const dispatch = useDispatch();
     const onLogout = () => {
         dispatch(logout());
+        try {
+            localStorage.removeItem('currentUser');
+        } catch (e) {
+            console.log(e);
+        }
     }
-    return <Header user={user} onLogout={onLogout} {...props} />;
+    return <Header currentUser={currentUser} onLogout={onLogout} {...props} />;
 };
 
 export default HeaderContainer;
