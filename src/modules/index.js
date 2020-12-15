@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import loading from 'modules/loading';
 import auth, { AuthSaga } from 'modules/auth';
-import userinfo from 'module/userinfo'
+import userinfo from 'modules/userinfo'
 
 const rootReducer = combineReducers({
     loading,
     auth,
-    userinfo
+    userinfo,
 });
 
 export function* rootSaga() {
