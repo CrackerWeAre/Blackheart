@@ -116,7 +116,7 @@ const auth = handleActions(
       ...state,
       currentUser: {
         uName: user.result.token,
-        uEmail: user.result.uEmail,
+        uEmail: user.result.uEmail
       },
     }),
     // 로그인 실패
