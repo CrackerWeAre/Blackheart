@@ -1,82 +1,24 @@
-import Pagination from 'components/common/Pagination';
-import * as apis from 'lib/api/userinfo';
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component, useState, useEffect, useSelector, useDispatch } from 'react'
 import { connect } from 'react-redux'
 import styled, { css } from 'styled-components';
+import Pagination from 'components/common/Pagination';
+import Button from 'components/common/Button';
+import { cart } from 'modules/userinfo'
 
-export const OrderList = ({data}) => {
-
-    const [itemList, setItemList] = useState([])
-    const [itemListNum, setItemListNum] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(10)
-    const [totalPosts, setTotalPosts] = useState(20)
+export const Cart = () => {
+    const cartList = useSelector(state => state.userinfo.cart)
+    const { uEmail, token } = useSelector(state => state.auth.user)
     const [loading, setLoading] = useState(false)
-    const [filter, setFilter] = useState(0)
-    const indexOfLastPost = itemListNum * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const [currentPosts, setCurrentPosts] = useState(itemList.slice(indexOfFirstPost, indexOfLastPost));
 
-    const setStatus = (data) => {
-        setFilter(data.target.id)
-        console.log(data.target.id)
-    }
+    const handleChange = (e) => {
+        
+    };
 
-    const findStatus = (data) => {
-        var output = "주문접수";
-        if(data==="1"){
-            output = "입금확인"
-        }else if(data==="2"){
-            output = "출고 처리 중"
-        }else if(data==="3"){
-            output = "출고 완료"
-        }else if(data==="4"){
-            output = "배송 시작"
-        }else if(data==="5"){
-            output = "배송 완료"
-        }else if(data==="6"){
-            output = "구매 확정"
-        }else if(data==="7"){
-            output = "구매 취소"
-        }else if(data==="8"){
-            output = "결제 오류"
-        }else if(data==="9"){
-            output = "교환 요청"
-        }else if(data==="10"){
-            output = "교환 주문 접수"
-        }else if(data==="11"){
-            output = "교환 완료"
-        }else if(data==="12"){
-            output = "교환 취소"
-        }else if(data==="13"){
-            output = "환불 요청"
-        }else if(data==="14"){
-            output = "환불 처리 중"
-        }else if(data==="15"){
-            output = "환불 완료"
-        }
+    const dispatch = useDispatch();
 
-        return output;
-    }
-
-    const loadData = async() => {
-        const itemList = await apis.userOrder({id:31})
-        console.log(itemList)
-        if(itemList.status===200){
-            setItemList(itemList.data.result)
-        }
-    }
-    
     useEffect(() => {
-        loadData()
+        dispatch(cart({email:uEmail, token}))
     }, [])
-
-    useEffect(() => {
-        setCurrentPosts(itemList.slice(indexOfFirstPost, indexOfLastPost));
-    }, [itemList, indexOfLastPost, indexOfFirstPost])
-
-    const paginate = (numb) => {
-        setItemListNum(numb)
-    }
 
     const tableList = ({loading, data}) => {
         if(loading){
@@ -84,7 +26,16 @@ export const OrderList = ({data}) => {
         } else {
             return data.map((item)=>{
                 return (
-                    <tr className="orderTableRow" key={item.oID}>
+                    <tr className="cartTableRow" key={item.oID}>
+                        <td>
+                            <div>
+                                <input 
+                                    type="checkbox"
+                                    checked={item.checked}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </td>
                         <td>
                             <div className="productDetail">
                                 <a className="imgBox">
@@ -97,26 +48,33 @@ export const OrderList = ({data}) => {
                             </div>
                         </td>
                         <td>
-                            <div>
-                                {item.oOrderDate.split(" ")[0]}
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                {item.oID}
-                            </div>
-                        </td>
-                        <td>
                             <div className="productPrice">
-                                <ul>
-                                    <li className="price">{(parseInt(item.pPrice)*(100-parseInt(item.pDiscount))/100).toLocaleString()}원</li>
-                                    <li className="quantity">{item.oQuantity}개</li>
-                                </ul>
+                                {(parseInt(item.pPrice)*(100-parseInt(item.pDiscount))/100).toLocaleString()}원
                             </div>
                         </td>
                         <td>
-                            <div>
-                                {findStatus(item.oStatus)}
+                            <div className="productAmount">
+                                {item.oQuantity}개
+                            </div>
+                        </td>
+                        <td>
+                            <div className="coupon">
+                                2,500원 
+                            </div>
+                        </td>
+                        <td>
+                            <div className="delivery">
+                                2,500원
+                            </div>
+                        </td>
+                        <td>
+                            <div className="fullPrice">
+                            {(parseInt(item.pPrice)*(100-parseInt(item.pDiscount)*parseInt(item.oQuantity))/100).toLocaleString()}원
+                            </div>
+                        </td>
+                        <td>
+                            <div className="fullPrice">
+                                <Button> 결제하기</Button>
                             </div>
                         </td>
                     </tr>
@@ -126,7 +84,7 @@ export const OrderList = ({data}) => {
         
     };
 
-    const OrderList = styled.section`
+    const CartList = styled.section`
         height : 100%;
         width: calc(100% - 250px);
         padding : 200px 0px 0px 0px;
@@ -172,11 +130,15 @@ export const OrderList = ({data}) => {
         }
 
         table colgroup col{
-            width: 15%;
+            width: 12%;
         }
 
         table colgroup col:nth-child(1){
-            width: 40%;
+            width: 5%;
+        }
+
+        table colgroup col:nth-child(2){
+            width: 35%;
         }
 
         table th {
@@ -239,64 +201,72 @@ export const OrderList = ({data}) => {
     `
 
     return (
-        <OrderList>
-            <header className="orderListHeader">
+        <CartList>
+            <header className="cartListHeader">
                 <h2 className="headerTitle">
-                    나의 쇼핑내역
+                    쇼핑 카트
                 </h2>
-                <ul className="headerList">
-                    <li onClick={setStatus} id="1">All</li>
-                    <li onClick={setStatus} id="2">주문접수</li>
-                    <li onClick={setStatus} id="3">결제완료</li>
-                    <li onClick={setStatus} id="4">상품준비중</li>
-                    <li onClick={setStatus} id="5">배송중</li>
-                    <li onClick={setStatus} id="6">배송완료</li>
-                    <li onClick={setStatus} id="7">취소/교환/환불</li>
-                </ul>
             </header>
-            <table className="orderListTable">
-                <colgroup className="orderListColGroup">
-                    <col className="orderListCol"></col>
-                    <col className="orderListCol"></col>
-                    <col className="orderListCol"></col>
-                    <col className="orderListCol"></col>
-                    <col className="orderListCol"></col>
+            <table className="cartListTable">
+                <colgroup className="cartListColGroup">
+                    <col className="cartListCol"></col>
+                    <col className="cartListCol"></col>
+                    <col className="cartListCol"></col>
+                    <col className="cartListCol"></col>
+                    <col className="cartListCol"></col>
+                    <col className="cartListCol"></col>
+                    <col className="cartListCol"></col>
+                    <col className="cartListCol"></col>
                 </colgroup>
-                <thead className="orderListTableHead">
-                    <tr className="orderListTableRow">
+                <thead className="cartListTableHead">
+                    <tr className="cartListTableRow">
                         <th scope="col">
                             <div className="tableDiv">
-                                제품 세부사항
+                                체크
                             </div>
                         </th>
                         <th scope="col">
                             <div className="tableDiv">
-                                제품 구매날짜
+                                상품정보
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableDiv">
+                                상품금액
                             </div>
                         </th>
                         <th scope="col">
                             <div  className="tableDiv">
-                                제품 주문번호
+                                수량
                             </div>
                         </th>
                         <th scope="col">
                             <div  className="tableDiv">
-                                제품 금액(수량)
+                                쿠폰
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div  className="tableDiv">
+                                배송
                             </div>
                         </th>
                         <th scope="col">
                             <div className="tableDiv">
-                                상태
+                                결제금액
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div className="tableDiv">
+                                <Button> 결제하기</Button>
                             </div>
                         </th>
                     </tr>
                 </thead>
-                <tbody className="orderListTableBody">
-                    {tableList({loading, data:currentPosts})}
+                <tbody className="cartListTableBody">
+                    {tableList({loading, data:cartList})}
                 </tbody>
             </table>
-            <Pagination nowPage={itemListNum} postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={paginate}></Pagination>
-        </OrderList>
+        </CartList>
     )
 }
 
@@ -308,4 +278,4 @@ const mapDispatchToProps = {
     
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderList)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

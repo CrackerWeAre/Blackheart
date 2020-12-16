@@ -1,8 +1,51 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import * as apis from 'lib/api/userinfo';
 import styled, { css } from 'styled-components';
 
 export const InfoEdit = () => {
+
+    const [id, setId] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailSite, setEmailSite] = useState('')
+    const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
+    const [firstAddress, setFirstAddress] = useState('');
+    const [secondAddress, setSecondAddress] = useState('');
+    const [post, setPost] = useState('');
+    const [birth, setBirth] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const loadData = async() => {
+        const itemList = await apis.userInfo({email:"truenorthj@gmail.com"})
+        
+        if(itemList.status===200){
+            var email = itemList.data.result.uEmail.split('@')
+            console.log(itemList);
+            setId(itemList.data.result.uID);
+            setEmail(email[0]);
+            setEmailSite(email[1])
+            setName(itemList.data.result.uName);
+            setGender(itemList.data.result.uGender);
+            setFirstAddress(itemList.data.result.uAddr);
+            setSecondAddress(itemList.data.result.uAddr);
+            setPost(itemList.data.result.uPost);
+            setBirth(itemList.data.result.uBirth);
+            setPhone(itemList.data.result.uPhone)
+        }
+    }
+
+    const postData = async() => {
+        const response = await apis.userInfoUpdate();
+        if(response.status===200){
+            console.log(response)
+        }
+    }
+    
+    useEffect(() => {
+        loadData()
+    }, []) 
+
     const InfoSection = styled.section`
         height : 100%;
         width: calc(100% - 250px);
@@ -110,7 +153,7 @@ export const InfoEdit = () => {
                             <tr>
                                 <th>이메일 아이디</th>
                                 <td id="td_email_id">
-                                    t********j@naver.com
+                                    {email}
 
                                 </td>
                             </tr>
@@ -122,14 +165,14 @@ export const InfoEdit = () => {
                                             <input type="text" id="custname" name="custname" value="소셜유저" placeholder="" />
                                         </p>
                                         <div className="correct_wrap">
-                                            <p id="validation_name" className="incorrect" >이름을 입력해주세요</p>
+                                            <p id="validation_name" className="incorrect" >{name}</p>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                                 <tr>
                                     <th>생년월일</th>
-                                    <td id="td_birth">****-**-**</td>
+                                        <td id="td_birth">{birth}</td>
                                 </tr>
 
                             <tr>
@@ -204,11 +247,11 @@ export const InfoEdit = () => {
                                 <th>이메일 <span>*</span></th>
                                 <td className="pb10 pt10">
                                     <p className="email">
-                                        <input type="text" id="email1" name="email1" value="truenorthj" placeholder="truenorthj" />
+                                        <input type="text" id="email1" name="email1" value={email} placeholder="truenorthj" />
                                         <span className="txt_email">@</span>
-                                        <input type="text" id="email2" name="email2" value="naver.com" placeholder="naver.com" className="mail_domain" />
+                                        <input type="text" id="email2" name="email2" value={emailSite} placeholder="naver.com" className="mail_domain" />
                                         <select className="normal mail_domain_select" >
-                                            <option value="write">직접입력</option>
+                                            <option value="write">{emailSite==="" ? "직접입력":emailSite}</option>
                                                 <option value="01">naver.com</option>
                                                 <option value="02">gmail.com</option>
                                                 <option value="03">hanmail.net</option>
@@ -228,45 +271,6 @@ export const InfoEdit = () => {
                                     <div className="bx_spam ">
                                         <span className="input_button checkbox"><input type="checkbox" id="isemail" name="isemail" value="01" className="agree-list"/><label for="isemail">이메일</label></span>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>개인정보 유효기간 설정 <span>*</span></th>
-                                <td className="pt10 pb10">
-                                    <span className="input_button radio"><input type="radio" id="radioSet1year" name="SleepDelayReq" value="1" checked=""/><label for="radioSet1year">1년</label></span>
-                                    <span className="input_button radio"><input type="radio" id="radioSet3year" name="SleepDelayReq" value="3"/><label for="radioSet3year">3년</label></span>
-                                    <span className="input_button radio"><input type="radio" id="radioSet5year" name="SleepDelayReq" value="5"/><label for="radioSet5year">5년</label></span>
-                                    <span className="input_button radio"><input type="radio" id="radioSetLast" name="SleepDelayReq" value="0"/><label for="radioSetLast">탈퇴시까지</label></span>
-                                    <p className="txt_guide_info">※ 유효기간을 설정하시면 설정한 기간동안 로그인 등 이용기록이 없어도 휴면계정이 되는 것을 방지할 수 있습니다.<br/>설정하신 않으신 경우 자동으로 1년으로 유지됩니다.</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>개인정보 수집 및 이용안내 (선택)</th>
-                                <td className="multi_input_row">
-                                    <span className="input_button radio personal_info_input"><input type="radio" name="PersonalInformation" value="Y" className="personal_info_agree"/><label for="personal_info_agree">동의</label></span>
-                                    <span className="input_button radio personal_info_input"><input type="radio" name="PersonalInformation" value="N" className="personal_info_disagree" checked=""/><label for="personal_info_disagree">비동의</label></span>
-                                    <button type="button" className="micro_btn open-layer open-collect2">내용보기</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>가입수단</th>
-                                <td>
-                                    <span className="td_join_info">
-                                        네이버
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>가입경로</th>
-                                <td>
-                                    <select id="knowpathcd" name="knowpathcd" className="normal" >
-                                        <option value="">가입경로 선택</option>
-                                            <option value="01">상품구매</option>
-                                            <option value="02">이벤트참여</option>
-                                            <option value="03">광고메일수신</option>
-                                            <option value="99">기타</option>
-                                    </select><div className="select-list-box " wck="knowpathcd" tabindex="0"><div tabindex="0" title=" " className="selected-headline" 
-                                    ><span>가입경로 선택</span></div><ul className="select-list" ><li><a title="가입경로 선택" href={"/"} className="select-list-link select-list-selected" >가입경로 선택</a></li><li><a title="상품구매" href={"/"} className="select-list-link" >상품구매</a></li><li><a title="이벤트참여" href={"/"} className="select-list-link" >이벤트참여</a></li><li><a title="광고메일수신" href={"/"} className="select-list-link" >광고메일수신</a></li><li><a title="기타" href={"/"} >기타</a></li></ul></div>
                                 </td>
                             </tr>
                         </tbody>

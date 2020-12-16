@@ -29,8 +29,8 @@ export const changeField = createAction(CHANGE_FIELD, ({ form, key, value }) => 
 
 export const initializeForm = createAction(INITIALIZE_FORM, form => form); // join, login
 // eslint-disable-next-line
-export const cart = createAction(CART, ({}) => ({
-
+export const cart = createAction(CART, ({email, token}) => ({
+    email, token
 }));
 // eslint-disable-next-line
 export const coupon = createAction(COUPON, ({}) => ({
