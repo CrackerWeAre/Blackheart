@@ -1,4 +1,5 @@
-import React, { Component, useState, useEffect, useSelector, useDispatch } from 'react'
+import React, { useState, useEffect, } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux'
 import styled, { css } from 'styled-components';
 import Pagination from 'components/common/Pagination';
@@ -6,18 +7,19 @@ import Button from 'components/common/Button';
 import { cart } from 'modules/userinfo'
 
 export const Cart = () => {
-    const cartList = useSelector(state => state.userinfo.cart)
-    const { uEmail, token } = useSelector(state => state.auth.user)
+
+    const cartList = useSelector(state => state.userinfo.cart.list);
+    // const { uEmail, uName:token } = useSelector(state => state.auth.currentUser)
     const [loading, setLoading] = useState(false)
 
     const handleChange = (e) => {
         
     };
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(cart({email:uEmail, token}))
+        
     }, [])
 
     const tableList = ({loading, data}) => {
@@ -38,7 +40,7 @@ export const Cart = () => {
                         </td>
                         <td>
                             <div className="productDetail">
-                                <a className="imgBox">
+                                <a className="imgBox" href="/mypage/cart">
                                     <img src={item.pListImage} alt="상품이미지"/>
                                 </a>
                                 <ul className="productDetailist">
@@ -73,7 +75,7 @@ export const Cart = () => {
                             </div>
                         </td>
                         <td>
-                            <div className="fullPrice">
+                            <div className="pay">
                                 <Button> 결제하기</Button>
                             </div>
                         </td>
@@ -257,7 +259,7 @@ export const Cart = () => {
                         </th>
                         <th scope="col">
                             <div className="tableDiv">
-                                <Button> 결제하기</Button>
+                                결제하기
                             </div>
                         </th>
                     </tr>
@@ -270,12 +272,5 @@ export const Cart = () => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default Cart
