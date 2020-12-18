@@ -124,7 +124,7 @@ const InfoContents = styled.div`
 
         }
 `;
-const MyInfoForm = ({ type, form, error, onChange, onSubmit, onClick }) => {
+const MyInfoForm = ({ type, form, onChange, onSubmit, onClick }) => {
     
     return (
         <InfoWrapper>
@@ -278,7 +278,6 @@ const MyInfoForm = ({ type, form, error, onChange, onSubmit, onClick }) => {
                                     </div>
                                 </td>
                                 <td colSpan="3">
-                                    {error && <ErrorMessage><span>{error}</span></ErrorMessage>}
                                     <BtnMt fullWidth>수정하기</BtnMt>
                                 </td>
                                 <td>

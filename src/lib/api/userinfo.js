@@ -43,9 +43,10 @@ export const userOrder = ({id, token}) => apis({
     url: '/order/list'
 });
 
-export const userReview = ({email, token}) => apis({
+export const reviewGet = ({email, token}) => apis({
     method: 'GET',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     data: qs.stringify({ 'uEmail': email, 'token': token}),
     url: '/comment/list'
 });
+

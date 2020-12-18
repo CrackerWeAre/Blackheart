@@ -10,7 +10,7 @@ import { Review } from 'pages/user/mypage/mypagemenu/myorder/Review';
 import { Navibar } from 'pages/user/mypage/Navibar';
 import { Coupon } from 'pages/user/mypage/mypagemenu/myinfo/Coupon';
 import { Grade } from 'pages/user/mypage/mypagemenu/myinfo/Grade';
-import  Cart  from 'pages/user/mypage/mypagemenu/cart/Cart';
+import { Cart } from 'pages/user/mypage/mypagemenu/cart/Cart';
 
 
 const MyPageRouter = ({ history }) => {

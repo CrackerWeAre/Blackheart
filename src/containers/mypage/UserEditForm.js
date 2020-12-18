@@ -5,11 +5,10 @@ import MyInfoForm from 'components/mypage/MyInfoForm';
 import { changeField, infoget, infoUpdate } from 'modules/userinfo';
 
 const UserEditForm = ({ history }) => {
-    const [error, setError] = useState(null);
+
     const dispatch = useDispatch();
-    const { form, authMessage, auth } = useSelector(({ userinfo, auth }) => ({
+    const { form, auth } = useSelector(({ userinfo, auth }) => ({
         form: userinfo.mystatus,
-        authMessage: userinfo.authMessage,
         auth: auth.currentUser
     }));
     
@@ -44,12 +43,7 @@ const UserEditForm = ({ history }) => {
     // 회원가입 성공/실패 처리
 
 
-    useEffect(() => {
-        if (authMessage) {
-            setError(authMessage);
-            return;
-        }
-    }, [authMessage]);
+ 
 
     return (
         <MyInfoForm
@@ -57,7 +51,6 @@ const UserEditForm = ({ history }) => {
             form={form}
             onChange={onChange}
             onSubmit={onSubmit}
-            error={error}
         />
     );
 }

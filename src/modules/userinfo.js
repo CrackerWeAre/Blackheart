@@ -14,6 +14,11 @@ const INITIALIZE_FORM = 'userinfo/INITIALIZE_FORM';
 const [CART, CART_SUCCESS, CART_FAILURE] = createRequestActionTypes(
     'userinfo/CART'
 );
+
+const [REVIEW, REVIEW_SUCCESS, REVIEW_FAILURE]  = createRequestActionTypes(
+    'userinfo/REVIEW'
+);
+
 const [COUPON, COUPON_SUCCESS, COUPON_FAILURE] = createRequestActionTypes(
     'userinfo/COUPON'
 );
@@ -57,12 +62,14 @@ export const infoget = createAction(INFOGET, ({email, token}) => ({
 
 export const infoUpdate = createAction(INFOUPDATE, ({userid, email, token, address, post, phone, birth})=>({userid, email, token, address, post, phone, birth}))
 
+export const reviewGet = createAction(REVIEW, ({email, token}) => ({email, token}))
 // 사가 생성
 const cartSaga = createTempRequestSaga(CART, userAPI.cart);
 const couponSaga = createTempRequestSaga(COUPON, userAPI.coupon);
 const mileagesaga = createTempRequestSaga(MILEAGE, userAPI.mileage);
 const infogetsaga = createTempRequestSaga(INFOGET, userAPI.userInfo);
 const infoupdatesaga = createTempRequestSaga(INFOUPDATE, userAPI.userInfoUpdate);
+const reviewgetsaga = createTempRequestSaga(REVIEW, userAPI.reviewGet);
 
 export function* UserinfoSaga() {
     yield takeLatest(CART, cartSaga);
@@ -70,6 +77,7 @@ export function* UserinfoSaga() {
     yield takeLatest(MILEAGE, mileagesaga);
     yield takeLatest(INFOGET, infogetsaga);
     yield takeLatest(INFOUPDATE, infoupdatesaga);
+    yield takeLatest(REVIEW, reviewgetsaga)
 }
 
 const initialState = {
@@ -80,6 +88,9 @@ const initialState = {
         list: []
     },
     coupon: {
+        list: []
+    },
+    review: {
         list: []
     },
     mileage: null,
@@ -168,6 +179,16 @@ const userinfo = handleActions(
             ...state,
         }),
         [INFOUPDATE_FAILURE]: (state, { payload: error }) => ({
+            ...state,
+            userError: error,
+        }),
+        [REVIEW_SUCCESS]: (state, { payload: data } )  => 
+            produce(state, draft => {
+                console.log(draft);
+                draft["review"]["list"] = data?.result; // payload의 result값을 state.review.list에 대입
+        }),
+    
+        [REVIEW_FAILURE]: (state, { payload: error }) => ({
             ...state,
             userError: error,
         }),
