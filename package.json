@@ -54,7 +54,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://blackheart.sparker.kr:8080/",
+  "proxy": "https://blackheart.sparker.kr:8080/",
   "devDependencies": {
     "@svgr/webpack": "^5.5.0"
   }

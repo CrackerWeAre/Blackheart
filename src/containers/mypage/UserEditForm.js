@@ -1,40 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { changeField, initializeForm, login } from 'modules/auth';
-import AuthForm from 'components/auth/AuthForm';
+import MyInfoForm from 'components/mypage/MyInfoForm';
+import { changeField, infoget, infoUpdate } from 'modules/userinfo';
 
 const UserEditForm = ({ history }) => {
+
     const dispatch = useDispatch();
-    const { form, user, userError } = useSelector(({ auth }) => ({
-        form: auth.login,
-        user: auth.user,
-        userError: auth.userError,
+    const { form, auth } = useSelector(({ userinfo, auth }) => ({
+        form: userinfo.mystatus,
+        auth: auth.currentUser
     }));
     
     const onChange = e => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
+        console.log( name, value, type, checked)
         dispatch(changeField({
-            form: 'login',
+            form: 'mystatus',
             key: name,
-            value
+            value: type === 'checkbox' ? + checked : value
         }));
     }
 
     const onSubmit = e => {
         e.preventDefault();
-        const { email, password } = form;
-
-        dispatch(login({ email, password }));
+        console.log("buttonon")
+        dispatch(infoUpdate({
+            userid:form.uid,
+            email:`${form.email}@${form.emailsite}`, 
+            token:auth.uName, 
+            address:form.address, 
+            phone: `${form.phonefirstnum}${form.phonemiddlenum}${form.phonelastnum}`, 
+            birth: `${form.birthyear}-${form.birthmonth}-${form.birthday}`
+       }))
     }
 
+    // 컴포넌트가 처음 렌더링될 때 form을 초기화함.
     useEffect(() => {
-        dispatch(initializeForm('login'));
-    }, [dispatch]);
+        dispatch(infoget({email: auth.uEmail, token: auth.uName}));
+    }, []);
+
+    // 회원가입 성공/실패 처리
+
+
+ 
 
     return (
-        <AuthForm 
-            type="login"
+        <MyInfoForm
+            type="mystatus"
             form={form}
             onChange={onChange}
             onSubmit={onSubmit}

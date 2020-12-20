@@ -45,7 +45,7 @@ const HeaderWrapper = styled.header`
     }
 `;
 
-const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
+const Header = ({ history, currentUser, onLogout, adminheader, ...otherProps }) => {
   return (
     <>
         <HeaderWrapper {...otherProps}>
@@ -79,10 +79,14 @@ const Header = ({ history, user, onLogout, adminheader, ...otherProps }) => {
                                 <Link to="/product/shop">Shop</Link>
                             </li>
                             <li>
-                                <Link to="/member/login">Log In</Link>
+                                {currentUser ? (
+                                    <Link to="/" onClick={onLogout}>Log Out</Link>
+                                ) : (
+                                    <Link to="/member/login">Log In</Link>
+                                )}
                             </li>
                             <li>
-                                <Link to="/member/join">Sign Up</Link>
+                                <Link to="/member/join">Join Us</Link>
                             </li>
                             <li>
                                 <Link to="/admin/main">Admin</Link>

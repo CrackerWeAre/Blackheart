@@ -20,22 +20,49 @@ const AuthFormWrapper = styled.div`
         font-size: 0.875;
         margin-bottom: 3.71900826446281vh;
     }
+`;
 
-    .form-check {
-        position: relative;
-        display: block;
-        padding-left: 1.25rem;
-        margin-top: 6px;
+const FormInput = styled.div`
+    position: relative;
 
-        input {
-            position: absolute;
-            margin-left: -1.25rem;
+    div button {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-20%);
+        outline: none;
+        background-color: #130D14;
+        border-color: #130D14;
+        border-radius: 3px;
+        cursor: pointer;
+
+        span {
+            font-size: .75rem;
+            line-height: 1.714286;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
         }
     }
+`;
 
-    .form-check-label {
+const TermsGroup = styled.div`
+    margin-top: 12px;
+    padding-left: 1.25rem;
+
+    input {
+        margin-left: -1.25rem;
+    }
+
+    label {
         cursor: pointer;
-        margin-bottom: 0;
+        padding-left: 1rem;
+        font-size: .875rem;
+        font-family: 'Poppins', sans-serif;
+        
+        span {
+            padding-right: 0.2rem;
+            /* color: #ff4949; */
+        }
     }
 `;
 
@@ -121,7 +148,7 @@ const btnTypeText = {
     join: '회원가입'
 };
 
-const AuthForm = ({ type, form, error, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, error, onChange, onSubmit, onClick }) => {
     return (
         <AuthFormWrapper>
             <h1>
@@ -131,49 +158,68 @@ const AuthForm = ({ type, form, error, onChange, onSubmit }) => {
             <form onSubmit={onSubmit}>
                 {type === 'join' ? (
                     <>
-                        <Input
-                            type="email"
-                            name="email"
-                            id="email"
-                            placeholder="이메일"
-                            value={form.email}
-                            onChange={onChange}
-                            autoFocus
-                        />
-                        <Input
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="비밀번호"
-                            value={form.password}
-                            onChange={onChange}
-                        />
-                        <Input
-                            type="password"
-                            name="confirmPassword"
-                            id="confirmPassword"
-                            placeholder="비밀번호 확인"
-                            value={form.confirmPassword}
-                            onChange={onChange}
-                        />
-                        <Input
-                            type="text"
-                            name="username"
-                            id="username"
-                            placeholder="이름"
-                            value={form.username}
-                            onChange={onChange}
-                        />
-                        {/* <div className="form-check">
-                            <label htmlFor="agree" className="form-check-label">
-                                <Input
-                                    type="checkbox"
-                                    name="agree"
-                                    id="agree"
-                                />
-                                <span>이용 약관에 동의합니다.</span>
+                        <FormInput>
+                            <Input
+                                type="text"
+                                name="username"
+                                id="username"
+                                placeholder="이름"
+                                value={form.username}
+                                onChange={onChange}
+                            />
+                        </FormInput>
+
+                        <FormInput>
+                            <Input
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder="이메일"
+                                value={form.email}
+                                onChange={onChange}
+                                autoFocus
+                            />
+                            <div>
+                                <button onClick={onClick}>
+                                    <span>중복 확인</span>
+                                </button>
+                            </div>
+                        </FormInput>
+                        
+                        <FormInput>
+                            <Input
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="비밀번호"
+                                value={form.password}
+                                onChange={onChange}
+                            />
+                        </FormInput>
+                        
+                        <FormInput>
+                            <Input
+                                type="password"
+                                name="confirmPassword"
+                                id="confirmPassword"
+                                placeholder="비밀번호 확인"
+                                value={form.confirmPassword}
+                                onChange={onChange}
+                            />
+                        </FormInput>
+
+                        <TermsGroup>
+                            <input 
+                                type="checkbox"
+                                name="agree"
+                                id="agree"
+                                checked={form.agree}
+                                onChange={onChange}
+                            />
+                            <label htmlFor="agree">
+                                <span>[필수]</span>이용 약관 동의
                             </label>
-                        </div> */}
+                        </TermsGroup>
                     </>
                 ) : (
                     <>
@@ -222,7 +268,7 @@ const AuthForm = ({ type, form, error, onChange, onSubmit }) => {
             <Footer>
                 {type === 'join' ? (
                     <>
-                        <span>이미 계정이 있으세요?</span>
+                        <span>이미 계정이 있으신가요?</span>
                         <Link to="/member/login">로그인</Link>
                     </>
                 ) : (

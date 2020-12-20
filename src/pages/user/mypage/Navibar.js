@@ -132,7 +132,7 @@ export const Navibar = () => {
                     <div className="infoSummary">
                         <h2 className="infoSummaryTitle">사용자이름</h2>
                         <ul className="infoSummeryContents">
-                            <li>장바구니</li>
+                            <li><Link to="/mypage/cart">장바구니</Link></li>
                             <li></li>
                         </ul>
                     </div>
