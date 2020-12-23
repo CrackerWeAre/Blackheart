@@ -137,7 +137,7 @@ const TableFullWidth = () => {
         ))}
       </Table>
 
-      <PaginationShorthand></PaginationShorthand>
+      <PaginationShorthand/>
       
       <Button
         className="button"
