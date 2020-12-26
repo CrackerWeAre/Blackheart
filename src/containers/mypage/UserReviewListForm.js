@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MyInfoForm from 'components/mypage/MyInfoForm';
 import { changeField, infoget, infoUpdate, reviewGet } from 'modules/userinfo';
-import PostListForm from 'components/mypage/PostListForm';
+import ReviewListForm from 'components/mypage/ReviewListForm';
 
-const UserPostListForm = () => {
+const UserReviewListForm = () => {
 
     const dispatch = useDispatch();
     const { form, auth } = useSelector(({ userinfo, auth }) => ({
         form: userinfo.mystatus,
         auth: auth.currentUser
     }));
+
+    const {review} = useSelector(({userinfo}) => ({review: userinfo.review.list}))
 
     //추후에 수정 및 제거를 위한 버튼
     const onSubmit = e => {
@@ -22,13 +24,14 @@ const UserPostListForm = () => {
 
     // 컴포넌트가 처음 렌더링될 때 form을 초기화함.
     useEffect(() => {
-        dispatch(reviewGet({email: auth.uEmail, token: auth.uName}));
-    }, []);
+        console.log(form)
+        if(form)dispatch(reviewGet({uID: form.uid, token: auth.uName}));
+    }, [form]);
 
     return (
-        <PostListForm>
-        </PostListForm>
+        <ReviewListForm dataList={review}>
+        </ReviewListForm>
     )
 }
 
-export default UserPostListForm
+export default UserReviewListForm

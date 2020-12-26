@@ -44,8 +44,8 @@ export const changeField = createAction(
 
 export const initializeForm = createAction(INITIALIZE_FORM, form => form); // join, login
 // eslint-disable-next-line
-export const cart = createAction(CART, ({email, token}) => ({
-    email, token
+export const cart = createAction(CART, ({uID, token}) => ({
+    uID, token
 }));
 // eslint-disable-next-line
 export const coupon = createAction(COUPON, ({}) => ({
@@ -62,7 +62,9 @@ export const infoget = createAction(INFOGET, ({email, token}) => ({
 
 export const infoUpdate = createAction(INFOUPDATE, ({userid, email, token, address, post, phone, birth})=>({userid, email, token, address, post, phone, birth}))
 
-export const reviewGet = createAction(REVIEW, ({email, token}) => ({email, token}))
+export const reviewGet = createAction(REVIEW, ({uID, token}) => ({
+    uID, token
+}))
 // 사가 생성
 const cartSaga = createTempRequestSaga(CART, userAPI.cart);
 const couponSaga = createTempRequestSaga(COUPON, userAPI.coupon);
@@ -115,7 +117,6 @@ const userinfo = handleActions(
     {
         [CHANGE_FIELD]: (state, { payload: { form, key, value } }) => 
             produce(state, draft => {
-                console.log(draft);
                 draft[form][key] = value; // state.join.username을 바꿈.
             }),
         [INITIALIZE_FORM]: (state, { payload: form }) => ({
@@ -124,11 +125,12 @@ const userinfo = handleActions(
             userError: null, // 폼 전환시 회원 인증 에러 초기화
         }),
         // 회원가입 성공
-        [CART_SUCCESS]: (state, { payload: user }) => ({
-            ...state,
-            user,
-            userError: null,
-        }),
+        [CART_SUCCESS]: (state, { payload: user }) => (
+            produce(state, draft => {
+            console.log(draft);
+            draft["cart"]['list'] = user?.result; // payload의 result값을 state.review.list에 대입
+            })
+        ),
         // 회원가입 실패
         [CART_FAILURE]: (state, { payload: error }) => ({
             ...state,
@@ -182,10 +184,10 @@ const userinfo = handleActions(
             ...state,
             userError: error,
         }),
-        [REVIEW_SUCCESS]: (state, { payload: data } )  => 
+        [REVIEW_SUCCESS]: (state, { payload: user } )  => 
             produce(state, draft => {
                 console.log(draft);
-                draft["review"]["list"] = data?.result; // payload의 result값을 state.review.list에 대입
+                draft["review"]["list"] = user?.result; // payload의 result값을 state.review.list에 대입
         }),
     
         [REVIEW_FAILURE]: (state, { payload: error }) => ({

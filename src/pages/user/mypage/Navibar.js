@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components';
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 
 const NaviBar = styled.div`
@@ -21,11 +21,14 @@ const NaviBar = styled.div`
 
     ul {
         margin-bottom: 28px;
+        li {
+            list-style: none;
+        }
+        .nav_list {
+
+        }
     }
 
-    ul li {
-        list-style: none;
-    }
 
     ul li a {
         display: inline-block;
@@ -45,92 +48,104 @@ const NavHeader = styled.div`
     background-color: #000000;
     color: white;
 
+    a {
+        color: white;
+        :hover {
+            color : gray;
+        }
+    }
+
     .naviHeader {
         padding: 50px 45px 50px 45px;
         display: table;
         width: 100% !important;
         height: 100%;
-    }
 
-    .naviHeader .headerMain {
-        position: relative;
-        vertical-align: middle;
-        display: table-cell;
-        text-align: center;
-    }
+        .headerMain {
+            position: relative;
+            vertical-align: middle;
+            display: table-cell;
+            text-align: center;
 
-    .naviHeader .headerPoint {
-        position: relative;
-        width: 25%;
-        vertical-align: middle;
-        display: table-cell;
-        text-align: center;
-    }
+            
+        }
 
-    .naviHeader .headerPoint::before {
-        content: '';
-        display: block;
-        width: 1px;
-        height: 100px;
-        position: absolute;
-        background: #e5e5e5;
-        left: 0;
-        top: 50%;
-        margin-top: -50px;
-    }
+        .headerCoupon {
+            position: relative;
+            width: 25%;
+            vertical-align: middle;
+            display: table-cell;
+            text-align: center;
 
-    .naviHeader .headerCoupon {
-        position: relative;
-        width: 25%;
-        vertical-align: middle;
-        display: table-cell;
-        text-align: center;
-    }
+            ::before {
+                content: '';
+                display: block;
+                width: 1px;
+                height: 100px;
+                position: absolute;
+                background: #e5e5e5;
+                left: 0;
+                top: 50%;
+                margin-top: -50px;
+            }
+        
+        }
 
-    .naviHeader .headerCoupon::before {
-        content: '';
-        display: block;
-        width: 1px;
-        height: 100px;
-        position: absolute;
-        background: #e5e5e5;
-        left: 0;
-        top: 50%;
-        margin-top: -50px;
+        .headerPoint {
+            position: relative;
+            width: 25%;
+            vertical-align: middle;
+            display: table-cell;
+            text-align: center;
+    
+            ::before {
+                content: '';
+                display: block;
+                width: 1px;
+                height: 100px;
+                position: absolute;
+                background: #e5e5e5;
+                left: 0;
+                top: 50%;
+                margin-top: -50px;
+            }
+        }
     }
 
 `
 export const Navibar = () => {
+    const state = useSelector(state => state?.userinfo.mystatus)
     return (
         <>
             <NavHeader>
                 <div className="naviHeader">
                     <div className="headerMain">
                         <div className="tabled full-width">
-                            <div>
-                                <div></div>
-                                <span>정보 수정</span>
-                            </div>
-                            <div>
-                                <span>정윤도 님 안녕하세요.</span>
-                                <div>누적 구매금액: 0원</div>
-                            </div>
+                            <ul>
+                                <li><Link to="/mypage/myinfo">정보 수정</Link></li>
+                                <li>{state?.username? state?.username :  "사용자님 " } 안녕하세요.</li>
+                                <li><div>누적 구매금액: 0원</div></li>
+                            </ul>
                         </div>
                     </div>
                     <div className="headerPoint">
-                        <p>포인트</p>
-                        <span>1,500</span>
+                    <ul>
+                        <li><Link to="/mypage/point">포인트</Link></li>
+                        <li>누적 구매금액 : {state?.acculated ? state?.acculated :  "0" }원</li>
+                    </ul>
                     </div>
                     <div className="headerCoupon">
-                        <p>쿠폰</p>
-                        <span>0</span>
+                    <ul>
+                        <li><Link to="/mypage/coupon">쿠폰</Link></li>
+                        <li>쿠폰 : {state?.coupon ? state?.coupon :  "0" }개</li>
+                    </ul>
                     </div>
                 </div>
             </NavHeader>
             <NaviBar>
                 <section className="shortInfo">
                     <div className="infoSummary">
-                        <h2 className="infoSummaryTitle">사용자이름</h2>
+                        <h2 className="infoSummaryTitle">{state?.username? state?.username : "사용자님"}의 정보</h2>
                         <ul className="infoSummeryContents">
                             <li><Link to="/mypage/cart">장바구니</Link></li>
                             <li></li>
@@ -142,7 +157,6 @@ export const Navibar = () => {
                     <ul className="infoListContents">
                         <li className="infoListItem"><Link to="/mypage/orderlist">주문내역조회</Link></li>
                         <li className="infoListItem"><Link to="/mypage/reviewlist">상품 리뷰</Link></li>
-                        <li className="infoListItem"><a>증빙서류 발급</a></li>
                     </ul>
                     <h3 className="infoListTitle">나의 계정설정</h3>
                     <ul className="infoListContents">

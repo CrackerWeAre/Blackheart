@@ -1,15 +1,18 @@
 import Pagination from 'components/common/Pagination';
-import UserPostListForm from 'containers/mypage/UserPostListForm';
-
+import UserReviewListForm from 'containers/mypage/UserReviewListForm';
+import MainWrapper from 'components/mypage/MainWrapper';
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import styled, { css } from 'styled-components';
 
 export const Review = () => {
     return (
-        <UserPostListForm>
-        </UserPostListForm>
+        <MainWrapper>
+            <UserReviewListForm>
+            </UserReviewListForm>
+        </MainWrapper>
     )
 }
 
 export default Review
+

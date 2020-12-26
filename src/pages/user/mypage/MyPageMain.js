@@ -1,9 +1,10 @@
+import MainInfo from 'components/mypage/MainInfo';
 import React from 'react';
 
 const MyPageMain = () => {
     return (
         <>
-            <p>마이페이지 메인</p>
+            <MainInfo></MainInfo>
         </>
     );
 };

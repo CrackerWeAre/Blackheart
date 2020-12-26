@@ -3,7 +3,7 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import GlobalStyle from 'GlobalStyle';
 import styled, { css } from 'styled-components';
 import HeaderContainer from 'containers/common/HeaderContainer';
-import MyPageMain from 'pages/user/mypage/MyPageMain';
+import MainView from 'pages/user/mypage/MainView';
 import { OrderList } from 'pages/user/mypage/mypagemenu/myorder/OrderList';
 import { InfoEdit } from 'pages/user/mypage/mypagemenu/myinfo/InfoEdit';
 import { Review } from 'pages/user/mypage/mypagemenu/myorder/Review';
@@ -28,7 +28,7 @@ const MyPageRouter = ({ history }) => {
             <MyPageDiv>
                 <Navibar></Navibar>
                 <Switch>
-                    <Route path="/mypage" exact component={MyPageMain} />
+                    <Route path="/mypage" exact component={MainView} />
                     <Route path="/mypage/myinfo" component={InfoEdit} />
                     <Route path="/mypage/orderlist" component={OrderList}/>
                     <Route path="/mypage/reviewlist" component={Review} />

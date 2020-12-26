@@ -1,29 +1,44 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import MyInfoForm from 'components/mypage/MyInfoForm';
+import { changeField, infoget, infoUpdate, reviewGet } from 'modules/userinfo';
+import OrderListForm from 'components/mypage/OrderListForm';
+import * as apis from 'lib/api/userinfo';
+import { connect } from 'react-redux'
 
-const initialState = {
-    orderNum: 0,
-    orderProductNum: 0,
-    orderProductList: [],
-    orderTotalPrice: 0,
-    orderDate: "",
-    orderState: 0
-}
+import Pagination from 'components/common/Pagination';
+import OrderProcess from 'components/mypage/OrderProcess';
 
-export const UserOrderListForm = ({dataList}) => {
+const UserOrderListForm = () => {
+    const userInfo = useSelector(state => state?.userinfo?.mystatus?.uid)
+
+    const [dataList, dataListstate] = useState([])
+
+    const loadData = async(data) => {
+        const itemList = await apis.userOrder({uID:data})
+        console.log(itemList)
+        if(itemList.status===200){
+            if(itemList?.data?.result){
+                dataListstate(itemList?.data?.result)
+            }
+        }else {
+            alert('정보를 가져올 수 없습니다.')
+        }
+    }
     
-    const filterList = (data) => {
-        return data
-    }
-
-    if(Array.isArray(dataList)){
-        dataList.map(data=>filterList(data))
-    }
+    useEffect(() => {
+        console.log(userInfo)
+        if(userInfo)loadData(userInfo)
+    }, [userInfo])
 
 
     return (
-        <div>
+        <>
+            <OrderListForm dataList={dataList}>
+            </OrderListForm>
             
-        </div>
+        </>
     )
 }
 

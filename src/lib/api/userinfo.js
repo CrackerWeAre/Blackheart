@@ -1,11 +1,11 @@
 import apis from 'lib/api/api';
 import qs from 'qs';
 
-export const cart = ({email, token}) => apis({
+export const cart = ({uID, token}) => apis({
     method: 'GET',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    data: qs.stringify({ 'uEmail': email, 'token': token}),
-    url: '/'
+    params: { 'uID': uID, 'token': token},
+    url: '/cart/list'
 });
 
 export const coupon = ({email, token}) => apis({
@@ -36,17 +36,23 @@ export const userInfoUpdate = ({userid, email, token, name, gender, address, pos
     url: '/user/update'
 });
 
-export const userOrder = ({id, token}) => apis({
+export const userOrder = ({uID, token}) => apis({
     method: 'GET',
     headers: { 'content-type': 'multipart/form-data' },
-    params: { 'uID': id, 'token': token},
+    params: { 'uID': uID, 'token': token},
     url: '/order/list'
 });
 
-export const reviewGet = ({email, token}) => apis({
+export const reviewGet = ({uID, token}) => apis({
     method: 'GET',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    data: qs.stringify({ 'uEmail': email, 'token': token}),
-    url: '/comment/list'
+    params: { 'uID': uID, 'token': token},
+    url: '/review/board'
 });
 
+export const reviewCommentGet = ({uID, token}) => apis({
+    method: 'GET',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    params: { 'uID': uID, 'token': token},
+    url: '/review/comment'
+});

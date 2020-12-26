@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import * as apis from 'lib/api/userinfo';
 import styled, { css } from 'styled-components';
 import UserEditForm from 'containers/mypage/UserEditForm';
+import MainWrapper from 'components/mypage/MainWrapper';
 
 export const InfoEdit = () => {
 
 
     return (
-        <UserEditForm>
-        </UserEditForm>
+        <MainWrapper>
+            <UserEditForm>
+            </UserEditForm>
+        </MainWrapper>
     )
 }
 
