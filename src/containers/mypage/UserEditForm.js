@@ -14,7 +14,6 @@ const UserEditForm = ({ history }) => {
     
     const onChange = e => {
         const { name, value, type, checked } = e.target;
-        console.log( name, value, type, checked)
         dispatch(changeField({
             form: 'mystatus',
             key: name,

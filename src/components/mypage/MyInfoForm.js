@@ -2,16 +2,20 @@ import React , { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import Input from 'components/common/Input';
 import Button from 'components/common/Button';
-import PhoneSelectForm from './PhoneSelectForm';
 import { BirthSelectForm } from './BirthSelectForm';
+import Select from '../common/Select'
 
 const InfoWrapper = styled.div`
     height : 100%;
     width: calc(100% - 250px);
-    padding : 300px 0px 0px 0px;
     flex: none;
     margin-top : 100px;
 `;
+
+const InfoSelect = styled(Select)`
+    margin-top: 0rem!important;
+`;
+
 
 const ErrorMessage = styled.div`
     display: flex;
@@ -160,7 +164,6 @@ const MyInfoForm = ({ type, form, onChange, onSubmit, onClick }) => {
                                             type="text"
                                             name="username"
                                             id="username"
-                    
                                             value={form.username}
                                             onChange={onChange}
                                         />
@@ -196,7 +199,7 @@ const MyInfoForm = ({ type, form, onChange, onSubmit, onClick }) => {
                                             onChange={onChange} 
                                             placeholder="이메일을 선택하세요." 
                                         /> 
-                                        <select 
+                                        <InfoSelect 
                                             name="emailsite"
                                             id="emailsite"
                                             value={form.emailsite}
@@ -208,7 +211,7 @@ const MyInfoForm = ({ type, form, onChange, onSubmit, onClick }) => {
                                             <option value="icloud.com">icloud.com</option>
                                             <option value="hanmail.net">hanmail.net</option>
                                             <option value="nate.com">nate.com</option>
-                                        </select>
+                                        </InfoSelect>
                                     </FormInput>
                                 </td>
                                 <td>
@@ -224,7 +227,53 @@ const MyInfoForm = ({ type, form, onChange, onSubmit, onClick }) => {
                                     </div>
                                 </td>
                                 <td colSpan="3">
-                                    <PhoneSelectForm phonefirstnum={form.phonefirstnum} phonemiddlenum={form.phonemiddlenum} phonelastnum={form.phonelastnum}  onChange={onChange}></PhoneSelectForm>
+                                    <FormInput>
+                                        <InfoSelect name="phonefirstnum" id="phonefirstnum" value={form.phonefirstnum? form.phonefirstnum : "010"} onChange={onChange}>
+                                                <option value="02" >02</option>
+                                                <option value="010" >010</option>
+                                                <option value="011" >011</option>
+                                                <option value="016" >016</option>
+                                                <option value="017" >017</option>
+                                                <option value="019" >019</option>
+                                                <option value="018" >018</option>
+                                                <option value="031" >031</option>
+                                                <option value="032" >032</option>
+                                                <option value="033" >033</option>
+                                                <option value="041" >041</option>
+                                                <option value="042" >042</option>
+                                                <option value="043" >043</option>
+                                                <option value="051" >051</option>
+                                                <option value="052" >052</option>
+                                                <option value="053" >053</option>
+                                                <option value="054" >054</option>
+                                                <option value="055" >055</option>
+                                                <option value="061" >061</option>
+                                                <option value="062" >062</option>
+                                                <option value="063" >063</option>
+                                                <option value="064" >064</option>
+                                                <option value="070" >070</option>
+                                                <option value="080" >080</option>
+                                                <option value="0503" >0503</option>
+                                                <option value="0505" >0505</option>
+                                                <option value="0507" >0507</option>
+                                        </InfoSelect>
+                                        <InfoInput 
+                                            type="text" 
+                                            name="phonemiddlenum" 
+                                            id="phonemiddlenum" 
+                                            value={form.phonemiddlenum} 
+                                            onChange={onChange} 
+                                            maxLength="4"
+                                        />
+                                        <InfoInput 
+                                            type="text" 
+                                            name="phonelastnum" 
+                                            id="phonelastnum" 
+                                            value={form.phonelastnum} 
+                                            onChange={onChange}
+                                            maxLength="4"
+                                        />
+                                    </FormInput>
                                 </td>
                                 <td>
                                     <div>
