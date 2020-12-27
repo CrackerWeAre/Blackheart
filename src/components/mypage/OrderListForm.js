@@ -32,7 +32,7 @@ export const OrderListForm = ({dataList}) => {
     
 
     const OrderList = styled.section`
-        width: calc(100% - 250px);
+
         flex: none;
         margin-top : 100px;
 
