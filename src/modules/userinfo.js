@@ -127,7 +127,6 @@ const userinfo = handleActions(
         // 회원가입 성공
         [CART_SUCCESS]: (state, { payload: user }) => (
             produce(state, draft => {
-            console.log(draft);
             draft["cart"]['list'] = user?.result; // payload의 result값을 state.review.list에 대입
             })
         ),

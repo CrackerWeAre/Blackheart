@@ -24,6 +24,7 @@ const ReviewListForm = ({dataList}) => {
     }
 
     useEffect(() => {
+        console.log(dataList)
         setItemList(dataList)
         setTempList(dataList)
     }, [dataList])
@@ -44,7 +45,6 @@ const ReviewListForm = ({dataList}) => {
 
     } 
     const tableList = ({loading, data}) => {
-        console.log(data)
         if(loading){
             return  <div> 로딩중 입니다. </div>
         } else {
@@ -66,7 +66,7 @@ const ReviewListForm = ({dataList}) => {
                             <div className="reviewContent">
                                 <ul>
                                     <li className="title">{item.rTitle}</li>
-                                    <li className="content">{item.rCommnet}</li>
+                                    <li className="content">{item.rContent}</li>
                                 </ul>
                             </div>
                         </td>
@@ -93,7 +93,7 @@ const ReviewListForm = ({dataList}) => {
     };
 
     const ReviewList = styled.section`
-        width: calc(100% - 250px);
+
         flex: none;
         margin-top : 100px;
 

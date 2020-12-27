@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import MyInfoForm from 'components/mypage/MyInfoForm';
-import { changeField, infoget, infoUpdate, reviewGet } from 'modules/userinfo';
+import { reviewGet } from 'modules/userinfo';
 import ReviewListForm from 'components/mypage/ReviewListForm';
 
 const UserReviewListForm = () => {
@@ -24,7 +22,6 @@ const UserReviewListForm = () => {
 
     // 컴포넌트가 처음 렌더링될 때 form을 초기화함.
     useEffect(() => {
-        console.log(form)
         if(form)dispatch(reviewGet({uID: form.uid, token: auth.uName}));
     }, [form]);
 
