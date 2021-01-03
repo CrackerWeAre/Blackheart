@@ -15,6 +15,9 @@ const [CART, CART_SUCCESS, CART_FAILURE] = createRequestActionTypes(
     'userinfo/CART'
 );
 
+const [CART_CHECK] =  'userinfo/CART_CHECK';
+const [CART_CHANGE] =  'userinfo/CART_CHANGE';
+
 const [REVIEW, REVIEW_SUCCESS, REVIEW_FAILURE]  = createRequestActionTypes(
     'userinfo/REVIEW'
 );
@@ -47,10 +50,20 @@ export const initializeForm = createAction(INITIALIZE_FORM, form => form); // jo
 export const cart = createAction(CART, ({uID, token}) => ({
     uID, token
 }));
+
+export const cartCheck = createAction(CART_CHECK, ({cID, token}) => ({
+    cID
+}))
+
+export const cartChange = createAction(CART_CHANGE, ({cID, number, token}) => ({
+    cID, number
+}))
+
 // eslint-disable-next-line
 export const coupon = createAction(COUPON, ({}) => ({
 
 }));
+
 // eslint-disable-next-line
 export const mileage = createAction(MILEAGE, ({}) => ({
 
@@ -124,10 +137,35 @@ const userinfo = handleActions(
             [form]: initialState[form],
             userError: null, // 폼 전환시 회원 인증 에러 초기화
         }),
+        [CART_CHECK]: (state, {payload: { cID }}) => (
+            produce(state, draft => {
+                console.log(cID)
+                draft['cart']['list'].map(data => {
+                    if(data.cID.toString()===cID){
+                        data.checked = !data.checked
+                    }
+                    return data
+                })
+            })
+        ),
+
+        [CART_CHANGE]: (state, {payload: {cID, number}}) => (
+            produce(state, draft => {
+                console.log(cID, number)
+                draft['cart']['list'].map(data => {
+                    if(data.cID.toString()===cID){
+                        data.cQuantity = parseInt(number)
+                    }
+                    return data
+                })
+            })
+        ),
         // 회원가입 성공
         [CART_SUCCESS]: (state, { payload: user }) => (
+
             produce(state, draft => {
-            draft["cart"]['list'] = user?.result; // payload의 result값을 state.review.list에 대입
+                var items = user?.result.map(data => Object.assign(data, {checked: true}));
+                draft["cart"]['list'] = items; // payload의 result값을 state.review.list에 대입
             })
         ),
         // 회원가입 실패
@@ -185,7 +223,6 @@ const userinfo = handleActions(
         }),
         [REVIEW_SUCCESS]: (state, { payload: user } )  => 
             produce(state, draft => {
-                console.log(draft);
                 draft["review"]["list"] = user?.result; // payload의 result값을 state.review.list에 대입
         }),
     

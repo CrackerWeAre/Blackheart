@@ -11,6 +11,7 @@ import { Navibar } from 'pages/user/mypage/Navibar';
 import { Coupon } from 'pages/user/mypage/mypagemenu/myinfo/Coupon';
 import { Grade } from 'pages/user/mypage/mypagemenu/myinfo/Grade';
 import { Cart }  from 'pages/user/mypage/mypagemenu/cart/Cart';
+import { Order } from 'pages/user/mypage/mypagemenu/order/Order';
 
 
 const MyPageRouter = ({ history }) => {
@@ -35,6 +36,7 @@ const MyPageRouter = ({ history }) => {
                     <Route path="/mypage/coupon" component={Coupon} />
                     <Route path="/mypage/grade" component={Grade} />
                     <Route path="/mypage/cart" component={Cart} />
+                    <Route path="/mypage/order" component={Order} />
                 </Switch>
             </MyPageDiv>
         </>

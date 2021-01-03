@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MyInfoForm from 'components/mypage/MyInfoForm';
-import { cart } from 'modules/userinfo';
+import { cart, cartCheck, cartChange } from 'modules/userinfo';
 import CartListForm from 'components/mypage/CartListForm';
 
-const UserReviewListForm = () => {
+const CartContariner = () => {
     console.log("form")
     const dispatch = useDispatch();
     const { form, auth, cartlist } = useSelector(({ userinfo, auth }) => ({
@@ -14,8 +14,14 @@ const UserReviewListForm = () => {
         cartlist: userinfo.cart.list
     }),[]);
 
-    const sendData = (itemsToPay) => {
-        console.log(itemsToPay)
+    const checkData = (item) => {
+        console.log(item)
+        dispatch(cartCheck({cID: item, token: auth.uName}))
+    }
+
+    const changeNum = (cID, num) => {
+        console.log(cID, num)
+        dispatch(cartChange({cID: cID, number: num, token: auth.uName}))
     }
     useEffect(() => {
 
@@ -27,7 +33,7 @@ const UserReviewListForm = () => {
     }, [form]);
 
     return (
-        <CartListForm dataList={cartlist} sendData={sendData}>
+        <CartListForm dataList={cartlist} checkData={checkData} changeNum={changeNum}>
         </CartListForm>
         // <CartListForm>
         // </CartListForm>
@@ -35,4 +41,4 @@ const UserReviewListForm = () => {
     
 }
 
-export default UserReviewListForm
+export default CartContariner

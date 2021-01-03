@@ -148,7 +148,7 @@ export const Navibar = () => {
                         <h2 className="infoSummaryTitle">{state?.username? state?.username : "사용자님"}의 정보</h2>
                         <ul className="infoSummeryContents">
                             <li><Link to="/mypage/cart">장바구니</Link></li>
-                            <li></li>
+                            <li><Link to="/mypage/order">주문하기</Link></li>
                         </ul>
                     </div>
                 </section>

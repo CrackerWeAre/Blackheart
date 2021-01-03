@@ -2,38 +2,39 @@ import React, { useState, useEffect, useCallback, createRef, useMemo } from 'rea
 import styled, { css } from 'styled-components';
 import Button from 'components/common/Button';
 import produce from 'immer'
-export const CartListForm = ({dataList, sendData}) => {
+import Input from 'components/common/Input';
+export const CartListForm = ({dataList, checkData, changeNum}) => {
 
     
     console.log("list", dataList)
     const [loading, setLoading] = useState(true)
     const [tempList, setTempList] = useState(dataList)
-    var newItem = produce(dataList, draft => draft)
-    const handleChange = (e, item) => {
-        if(e.target.checked){
-            
-            if(newItem){
-                newItem=newItem.concat([item])
-            }else{
-                newItem=newItem.concat([item])
-            }
-        }else{
-            
-            if(newItem){
-                newItem=newItem.filter(data => data !== item)
-            }else{
-                newItem=newItem.filter(data => data !== item)
-            }
-        }
+    
+
+    
+    const sendValue = (e) => {
+        e.preventDefault();
+        checkData(e.target.value)
     }
 
-    const sendToPay = useCallback(
-        () => {
-            sendData(newItem);
-        },
-        [newItem],
-    )
-    
+    const changeItemNum = (e) => {
+        e.preventDefault();
+        changeNum(e.target.id, e.target.value)
+    }
+
+    const addNum = (e) => {
+        e.preventDefault();
+        changeNum(e.target.id, e.target.value+1)
+    }
+    const subNum = (e) => {
+        e.preventDefault();
+        if(e.target.value-1===0){
+            alert('더이상 개수를 줄일 수 없습니다.')
+        }else{
+            changeNum(e.target.id, e.target.value-1)
+        }
+        
+    }
    
     // const dispatch = useDispatch();
 
@@ -49,30 +50,24 @@ export const CartListForm = ({dataList, sendData}) => {
     }, [tempList])
 
     const tableList = ({loading, data}) => {
-        let number = 0;
 
         if(loading){
             return  <div> 로딩중 입니다. </div>
         } else {
             return data?.map((item)=>{
-
                 var price = (parseInt(item.product.pPrice)*(100-parseInt(item.product.pDiscount))/100).toLocaleString();
                 var delivary = 2500;
                 var totalprice = (parseInt(item.product.pPrice)*(100-parseInt(item.product.pDiscount))/100*parseInt(item.cQuantity)+delivary).toLocaleString();
-                const sendData = (e) => {
-                    handleChange(e, item)
-                }
-                number++;
-
+                
                 return (
                     <tr className="cartTableRow" key={item.cID}>
                         <td>
                             <div>
                                 <input 
                                     type="checkbox"
-                                    defaultChecked
-                                    onChange={sendData}
-                                    value={item}
+                                    checked = {item.checked}
+                                    onChange={sendValue}
+                                    value={item.cID}
                                 />
                             </div>
                         </td>
@@ -94,9 +89,15 @@ export const CartListForm = ({dataList, sendData}) => {
                         </td>
                         <td>
                             <ul className="productAmount">
-                                <li className="item">-</li>
-                                <li className="quantity">{item.cQuantity}개</li>
-                                <li className="item">+</li>
+                                <li className="item" onClick={subNum} id={item.cID} value={item.cQuantity} >-</li>
+                                <li className="quantity">
+                                    <Input 
+                                        type="text"
+                                        onChange={changeItemNum}
+                                        value={item.cQuantity} 
+                                        id={item.cID}
+                                    />개</li>
+                                <li className="item" onClick={addNum} id={item.cID} value={item.cQuantity} >+</li>
                             </ul>
                         </td>
                         <td>
@@ -355,7 +356,7 @@ export const CartListForm = ({dataList, sendData}) => {
                         </td>
                         <td>
                             <div className="pay">
-                                <Button onClick={sendToPay}>선택 결제하기</Button>
+                                <Button>선택 결제하기</Button>
                             </div>
                         </td>
                     </tr>
